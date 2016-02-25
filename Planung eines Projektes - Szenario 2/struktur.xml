@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ECSpandRecordsOrganizer xmlns="ecspand.recordsorganizer">
+  <ECSFile Type="List" Url="http://vmmpaw03:34451/Lists/Kunde/" Rootelement="true" Title="Kunden" ImageUrl="/_layouts/15/images/itgen.gif">
+    <ECSElement Type="List" Url="http://vmmpaw03:34451/Lists/Akte" Title="Akte" ImageUrl="/_layouts/15/images/itgen.gif">
+      <ReferenceField File="Title" Element="Kunde" />
+    </ECSElement>
+    <ECSElement Type="List" Url="http://vmmpaw03:34451/Lists/Sonderakte" Title="Sonderakte" ImageUrl="/_layouts/15/images/itgen.gif">
+      <ReferenceField File="Title" Element="Kunde" />
+    </ECSElement>
+    <ECSElement Type="List" Url="http://vmmpaw03:34451/Shared%20Documents" Title="Dokumente" ImageUrl="/_layouts/15/images/itgen.gif">
+      <ReferenceField File="Title" Element="Kunde" />
+    </ECSElement>
+    <ECSElement Type="List" Url="http://vmmpaw03:34451/Sonderdokumente/" Title="Sonderdokumente" ImageUrl="/_layouts/15/images/itgen.gif">
+      <ReferenceField File="Title" Element="Kunde" />
+    </ECSElement>
+  </ECSFile>
+  <ECSFile Type="List" Url="http://vmmpaw03:34451/Lists/Lieferant/" Rootelement="true" CMID="Kunden" Title="Lieferant" ImageUrl="/_layouts/15/images/itgen.gif">
+    <ECSElement Type="List" Url="http://vmmpaw03:34451/Lists/AkteLieferant" Title="AkteLieferant" ImageUrl="/_layouts/15/images/itgen.gif">
+      <ReferenceField File="Title" Element="Kunde" />
+    </ECSElement>
+  </ECSFile>
+</ECSpandRecordsOrganizer>

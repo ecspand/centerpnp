@@ -1,0 +1,286 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+            {
+                "Name": "menu",
+                "ClassName": "Template_menu_global",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menu_global",
+                "Inherits": "menuDefault",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "menu",
+                "ClassName": "Template_menu_global_akte",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menu_global_akte",
+                "Inherits": "menu_global",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "quickSearch",
+                "ClassName": "Template_quickSearch_global",
+                "ContainerSelector": ".quickSearchContainer",
+                "FileName": "quickSearch_global",
+                "Inherits": "quickSearchDefault",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "masterData",
+                "ClassName": "Template_masterData_global",
+                "ContainerSelector": ".masterData",
+                "FileName": "masterData_global",
+                "Inherits": "masterDataDefault",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "menuDocument",
+                "ClassName": "Template_menuDocument_global",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menuDocument_global",
+                "Inherits": "menuDocumentDefault",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "tabs",
+                "ClassName": "Template_tabs_global",
+                "ContainerSelector": ".contentRight",
+                "FileName": "tabs_global",
+                "Inherits": "tabsDefault",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "tabs",
+                "ClassName": "Template_tabs_global_akte",
+                "ContainerSelector": ".contentRight",
+                "FileName": "tabs_global_akte",
+                "Inherits": "tabs_global",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "menuDocument",
+                "ClassName": "Template_menuDocument_global_dokumente",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menuDocument_global_dokumente",
+                "Inherits": "menuDocument_global",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "menuDocument",
+                "ClassName": "Template_menuDocument_global_dokumente_sonderdokumente",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menuDocument_global_dokumente_sonderdokumente",
+                "Inherits": "menuDocument_global_dokumente",
+                "IsDefault": false,
+                "Editable": true
+            },
+            {
+                "Name": "menu",
+                "ClassName": "Template_menu_global_akte_aktelieferant",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menu_global_akte_aktelieferant",
+                "Inherits": "menu_global_akte",
+                "IsDefault": false,
+                "Editable": true
+            }
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterData_global"
+                                },
+                                {
+                                    "FileName": "menu_global"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDefault"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ],
+                    "CMID": "Kunden"
+                },
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDocumentDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterData_global"
+                                },
+                                {
+                                    "FileName": "menuDocument_global_dokumente"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDocumentDefault"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ],
+                    "CMID": "Dokumente"
+                },
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDocumentDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterData_global"
+                                },
+                                {
+                                    "FileName": "menuDocument_global_dokumente_sonderdokumente"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDocumentDefault"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ],
+                    "CMID": "Sonderdokumente"
+                },
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterData_global"
+                                },
+                                {
+                                    "FileName": "menu_global_akte_aktelieferant"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabs_global_akte"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ],
+                    "CMID": "AkteLieferant"
+                },
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterData_global"
+                                },
+                                {
+                                    "FileName": "menu_global_akte"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabs_global_akte"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ],
+                    "CMID": "Akte"
+                },
+                {
+                    "CMID": "Sonderakte",
+                    "FileName": "contentDefault",
+                    "IsDefault": false,
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "master_global"
+                                },
+                                {
+                                    "FileName": "menu_global"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDefault"
+                        },
+                        {
+                            "FileName": "quickSearch_global"
+                        }
+                    ]
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+
