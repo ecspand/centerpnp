@@ -12,8 +12,9 @@ var Template_menu_global = (function (_super) {
         _super.call(this, ctx, folder, options);
         // ---[ELEMENTS-CONFIG-START]---
         this.extendedConfigSerialized = '{}';
-        // ---[ELEMENTS-CONFIG-END]---
+        // ---[ELEMENTS-CONFIG-END]---     
     }
+    
     Template_menu_global.prototype.init = function () {
         var _this = this;
         var dfd = $.Deferred();
@@ -27,8 +28,9 @@ var Template_menu_global = (function (_super) {
 				btn = new ecspand.Templates.Elements.Element_buttonWorkflowDefault(elmselftemp, JSON.parse(settings), elmselftemp.viewModel.items, elmselftemp.Element81d0e8dcbc1248bd82cc371f4b697cceOptions || {});
 				self.deferreds.push(btn.init());
 				// [EDE:Element81d0e8dc-bc12-48bd-82cc-371f4b697cce]
-
+                
 				// ---[ELEMENTS-BLOCK-END]---
+                
                 dfd.resolve();
             }
             else {
@@ -40,6 +42,7 @@ var Template_menu_global = (function (_super) {
     Template_menu_global.prototype.destroy = function () {
         return _super.prototype.destroy.call(this);
     };
+    
     return Template_menu_global;
 })(Template_menu);
 //# sourceURL=menu_global.js
