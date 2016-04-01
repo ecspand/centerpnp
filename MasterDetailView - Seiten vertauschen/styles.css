@@ -1,0 +1,9 @@
+.ecsContent .contentLeft {
+	max-width: 60% !important;
+	width: 60% !important;
+}
+
+.ecsContent .contentRight {
+	max-width: 39% !important;
+	width: 39% !important;
+}

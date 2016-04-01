@@ -1,0 +1,48 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "http://mysharepoint/scripts/styles.css",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "CMID": "Kundenakte",
+                    "FileName": "contentDefault",
+                    "IsDefault": false,
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "ContainerSelector": ".contentRight",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "menuDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterDataDefault"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDefault",
+                            "ContainerSelector": ".contentLeft"
+                        },
+                        {
+                            "FileName": "quickSearchDefault"
+                        }
+                    ]
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+
