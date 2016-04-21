@@ -22,7 +22,7 @@ $.fn.ecspandHoverPanel = function() {
 				
                 // Die zur Ermittlung des eigentlichen Items benötigten Informationen werden im dataItems Object der MasterDataView mitgeführt und können pro Row abgerufen werden
 				var items = mtv.get_dataItems(),
-				index = $row.index(),
+				index = $row.index() - $row.prevAll(".rgGroupHeader").length, // Für den Fall, dass die Gruppierung aktiv ist, muss die Anzahl der vorherigen Gruppen abgezogen werden
 				item = items[index],
 				isDocumentType = item.getDataKeyValue("IsDoc") === "1" || item.getDataKeyValue("IsDoc").toLowerCase() === "true",
 				itemId = item.getDataKeyValue("ID"),
