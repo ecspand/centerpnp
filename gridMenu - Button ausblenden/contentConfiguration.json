@@ -1,20 +1,27 @@
 
 {
     "ContentConfiguration": {
-        "CustomCSSFileUrl": "http://mysharepoint/scripts/styles.css",
+        "CustomCSSFileUrl": "",
         "CustomJSFileUrl": "",
         "TemplateDefinitions": [
+            {
+                "Name": "gridMenu",
+                "ClassName": "Template_gridMenu_example",
+                "FileName": "gridMenu_example",
+                "Inherits": "gridMenuDefault",
+                "IsDefault": false,
+                "Editable": true
+            }
         ],
         "TemplateConfigurations": {
             "FileConfigurations": [
                 {
-                    "CMID": "Kundenakte",
+                    "CMID": "Vertraege",
                     "FileName": "contentDefault",
                     "IsDefault": false,
                     "TemplateConfigurations": [
                         {
                             "FileName": "fileCoverDefault",
-                            "ContainerSelector": ".contentRight",
                             "TemplateConfigurations": [
                                 {
                                     "FileName": "primaryDefault"
@@ -31,11 +38,13 @@
                             ]
                         },
                         {
-                            "FileName": "tabsDefault",
-                            "ContainerSelector": ".contentLeft"
+                            "FileName": "quickSearchDefault"
                         },
                         {
-                            "FileName": "quickSearchDefault"
+                            "FileName": "tabsDefault"
+                        },
+                        {
+                            "FileName": "gridMenu_example"
                         }
                     ]
                 }

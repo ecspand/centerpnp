@@ -1,0 +1,30 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "http://mysharepoint/scripts/styles.css",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "CMID": "Kundenakte",
+                    "FileName": "contentDefault",
+                    "IsDefault": false,
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "tabsDefault",
+                            "ContainerSelector": ".contentLeft"
+                        },
+                        {
+                            "FileName": "quickSearchDefault"
+                        }
+                    ]
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+

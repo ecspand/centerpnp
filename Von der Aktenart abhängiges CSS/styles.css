@@ -1,0 +1,19 @@
+.ecsContent.kunden .contentLeft {
+	max-width: 60% !important;
+	width: 60% !important;
+}
+
+.ecsContent.kunden .contentRight {
+	max-width: 39% !important;
+	width: 39% !important;
+}
+
+.ecsContent.projekte .contentLeft {
+    max-width: 50% !important;
+    width: 50% !important;
+}
+
+.ecsContent.projekte .contentRight {
+    max-width: 49% !important;
+    width: 49% !important;
+}
