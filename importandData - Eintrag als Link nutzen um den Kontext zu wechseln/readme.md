@@ -73,18 +73,20 @@ Template_importantData_example.prototype.onFieldClick = function(value) {
         
         // Abruf des Contextes mittels siteUrl, webRelativeUrl, listID und itemID
         // roID ist optional, wird diese nicht übergeben wird die des aktuellen Contextes genommen
-        var newCtx = ecspand.SPObjectContainer.getCurrent().getElementContext(
-            this.ctx.get_site().get_url(), this.ctx.get_webRelativeUrl(), this.ctx.get_list().get_id(), itemID, this.ctx.get_roID());
+        ecspand.SPObjectContainer.getCurrent().getElementContext(
+            this.ctx.get_site().get_url(), this.ctx.get_webRelativeUrl(), this.ctx.get_list().get_id(), itemID, this.ctx.get_roID())
+            .done(function(newCtx) {
         
-        // args vom Typ ecspand.Args.ElementSelectedArgs zum wechseln des Contextes
-        var args = {
-            element: newCtx, // Das Element welches in der MasterDetail View angezeigt werden soll
-            folder: this.folder, // Der Ordner aus dem das Element selektiert wurde
-            viewType: ecspand.Args.ElementSelectedViewType.File // File == MasterDetailView, Folder == FolderView
-        };
-        
-        // Event wird gefeuert und von der obsersten Instanz abgefangen um anschließend den Context neu zu setzen
-        this._trigger("select", args);
+                // args vom Typ ecspand.Args.ElementSelectedArgs zum wechseln des Contextes
+                var args = {
+                    element: newCtx, // Das Element welches in der MasterDetail View angezeigt werden soll
+                    folder: this.folder, // Der Ordner aus dem das Element selektiert wurde
+                    viewType: ecspand.Args.ElementSelectedViewType.File // File == MasterDetailView, Folder == FolderView
+                };
+                
+                // Event wird gefeuert und von der obsersten Instanz abgefangen um anschließend den Context neu zu setzen
+                this._trigger("select", args);
+            });
     };
 ```
 
