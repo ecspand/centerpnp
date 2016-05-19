@@ -1,4 +1,4 @@
-# importantData - Eintrag als Link nutzen um den Kontext zu nutzen #
+# importantData - Eintrag als Link nutzen um den Kontext zu wechseln #
 
 ``ImportantData`` lassen sich im Standard nur für die reine Anzeige von "wichtigen Informationen" nutzen. Möchte man hier jedoch 
 weitere Funktionalitäten, wie z.B. eine Click-Funktion, anbieten, so ist dies mit ein paar einfachen Schritten möglich.
