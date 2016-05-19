@@ -70,6 +70,7 @@ var Template_importantData_example = (function (_super) {
     };
     Template_importantData_example.prototype.onFieldClick = function(value) {
         
+        var self = this;
         // Einfachs Beispiel - externe Seite aufrufen
         // location.href = "http://www.bing.com?q=" + value;
         
@@ -87,12 +88,12 @@ var Template_importantData_example = (function (_super) {
                 // args vom Typ ecspand.Args.ElementSelectedArgs zum wechseln des Contextes
                 var args = {
                     element: newCtx, // Das Element welches in der MasterDetail View angezeigt werden soll
-                    folder: this.folder, // Der Ordner aus dem das Element selektiert wurde
+                    folder: self.folder, // Der Ordner aus dem das Element selektiert wurde
                     viewType: ecspand.Args.ElementSelectedViewType.File // File == MasterDetailView, Folder == FolderView
                 };
                 
                 // Event wird gefeuert und von der obsersten Instanz abgefangen um anschließend den Context neu zu setzen
-                this._trigger("select", args);
+                self._trigger("select", args);
             });
     };
     Template_importantData_example.prototype.destroy = function () {
