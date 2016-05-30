@@ -1,0 +1,11 @@
+
+// Im Skript-Editor Webpart zu hinterlegen
+<script src="http://meinsharepoint/Scripts/webpartPanelBar.js"></script>
+<script src="http://meinsharepoint/Scripts/webpartTabs.js"></script>
+
+<script>
+$(function() {
+    $("#layoutsTable > tbody").children(":eq(1)").children(":eq(0)").webpartPanelBar();
+    $("#layoutsTable > tbody").children(":eq(1)").children(":eq(1)").webpartTabs();
+});
+</script>

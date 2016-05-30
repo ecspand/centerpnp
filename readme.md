@@ -24,4 +24,7 @@ Möchtet ihr auf dem Laufenden bleiben so abonniert dieses Projekt am besten. Wi
 Habt ihr selbst Ideen die es wert sind sie mit anderen zu teilen, könnt ihr diese als Merge Request einstellen. Wir schauen uns diese an, optimieren ggf. etwas, und fügen sie dem Projekt hinzu.
 * Zu jedem neuen Projekt gehört eine ausführliche beschreibung die ihr mittels [Mardown](http://markdowntutorial.com/) erstellen müsst. 
 
+## Disclaimer ##
+
+Die d.velop AG übernimmt bei der Anwendung der in diesen Beispielen beschriebenen Customizing-Möglichkeiten keinerlei Gewährleistung. Die angeforderten Dienst- und Supportleistungen zur Rekonstruktion der Daten sind in jedem Fall kostenpflichtig und unterliegen nicht den üblichen Supportleistungen.
 
