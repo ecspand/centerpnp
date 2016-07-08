@@ -28,8 +28,43 @@ Alles weitere kann in einem Script-Editor Webpart untergebracht werden.
 $(function() {
        // Initialisierung der QuickSearch mit den gewünschten Optionen
        $("#quickSearchOne").ecspandQuickSearch({ redirectToFileView: true}, { 
-           titleFormats: [{"contentTypeIDorListID": "0x01", formatString: "{Title} - ({ecsContentType})"}], 
-           additionalSelectProperties: ["ecsContentType"]
+           titleFormats: [{"contentTypeIDorListID": "0x01", formatString: "{Title} - ({ecsContentType}) | {CreatedOWSDate}"}], 
+           additionalSelectProperties: ["ecsContentType", "CreatedOWSDate"],
+           filterResults: function(results) { 
+				if (results) {
+                    // Das Beispiel zeigt, wie man ein Datum nachträglich formatieren kann
+
+                    // Regex zum Auffinden von Datumsfeldern im Format 2015-12-16T12:23:44Z
+					var re = new RegExp("(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)", "gi");
+
+					for (var i = 0; i < results.length; i++) {
+						var result = results[i],
+							title = result.title, // lediglich der title wird für die Ausgabe in der QuickSearch benötigt
+							match = title.match(re);
+						
+                        // Falls mindestens ein Datum gefunden wurde
+						if (match && match.length > 0) {
+							var date = null;
+							try {
+                                // Nur das erste gefundene Dateum wird ersetzt
+								var d = new Date(match[0]),
+									day = d.getDay().toString();
+
+								date = (day.length === 1 ? ("0" + day) : day)
+										+ "." + d.getMonth() + "." + d.getFullYear();
+							}
+							catch(exp) {}
+
+                            // Dateum ersetzen und Titel zurück in das results Array schreiben
+							if (date) {
+								results[i].title = title.replace(re, date);
+							}
+						}
+					}
+				}
+				
+				return results;
+		   }
         });
        $("#quickSearchTwo").ecspandQuickSearch({},{}); 
     });
@@ -46,6 +81,7 @@ $(function() {
  * usePrefixWildcard?: boolean - true falls immer mit angeführtem * gesucht werden soll - standard: false;
  * useSuffixWildcard?: boolean - true falls immer mit nachfolgendem * gesucht werden soll - standard: false;
  * additionalSelectProperties?: Array<string> - weitere Parameter (Managed Metadata) die abgerufen werden sollen 
+ * filterResults?: (results: Array<QuickSearchResult>) => Array<QuickSearchResult> - Die intern formatierten Suchergebnisse können hier nachträglich vor der Anzeige manipuliert werden
  * titleFormats?: Array<TitleFormat> - hiermit ist es möglich ein format pro contenttypeguid/listguid anzugeben. 
        > Im Standard verfübare Platzhalter: {Title}, {ListItemID}, {ListID}, {SPSiteURL}, {WebID}
        > <br/>Weitere Platzhalter müssen in den additionalSelectProperties angegeben werden
