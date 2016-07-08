@@ -1,45 +1,34 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 /*
  * Copyright 2015 d.velop AG
  */
-var Template_gridMenu_example = (function (_super) {
-    __extends(Template_gridMenu_example, _super);
-    function Template_gridMenu_example(ctx, folder, options) {
+var Template_tabs_example = (function (_super) {
+    __extends(Template_tabs_example, _super);
+    function Template_tabs_example(ctx, folder, options) {
         _super.call(this, ctx, folder, options);
         // ---[ELEMENTS-CONFIG-START]---
         this.extendedConfigSerialized = '{}';
         // ---[ELEMENTS-CONFIG-END]---
     }
-    Template_gridMenu_example.prototype.init = function () {
-        var _this = this;
-        var dfd = $.Deferred();
-        var self = this;
-        _super.prototype.init.call(this).done(function () {
-            if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
-                // ---[ELEMENTS-BLOCK-START]---
-                // ---[ELEMENTS-BLOCK-END]---
-                
-                // Erst hier ist einigermaßen sicher, dass der die Schaltfläche an der Oberfläche gebunden wurde
-                $("#btnGridMenuShowList").hide();
-                
-                // Alternativ können die Elemente auch direkt aus dem viewModel geworfen werden 
-                // this.viewModel.items.splice(0, 1);
-                
-                dfd.resolve();
-            }
-            else {
-                dfd.resolve();
-            }
-        }).fail(dfd.reject);
-        return dfd.promise();
+
+    // Überschreiben der addItems Methode - Vor dem eigentlichen hinzufügen der Tabs muss die Option dataImageUrlField gesetzt werden
+    Template_tabs_example.prototype.addItems = function() {
+
+        // Hierdurch wird bestimmt, welches Feld des "TabFolderItems" als IconSource gewählt wird
+        this.tabStrip.options.dataImageUrlField = "imageUrl";
+
+        // Aufruf der addItems Methode aus der Basis-Klasse 
+        _super.prototype.addItems.call(this);
     };
-    Template_gridMenu_example.prototype.destroy = function () {
-        _super.prototype.destroy.call(this);
+
+    // Überschreiben der createTabFolderItem Methode - hier werden viewModels der einzelnen Tabs generiert. Dies nutzen wir um eine neue Eigenschaft "imageUrl" hinzuzufügen
+    Template_tabs_example.prototype.createTabFolderItem = function (folder) {
+
+        // Erstellung des viewModels mittels der createTabFolderItem Methode aus der Basis-Klasse
+        var item = _super.prototype.createTabFolderItem.call(this, folder);
+        
+        // Ergänzung um "imageUrl" Eigenschaft und Rückgabe des Elementes
+        return $.extend(item, { imageUrl: folder.get_viewOptions().IconURL });
     };
-    return Template_gridMenu_example;
-})(Template_gridMenu);
+
+    return Template_tabs_example;
+})(Template_tabs);
