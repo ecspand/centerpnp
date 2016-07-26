@@ -7,7 +7,7 @@ $.fn.webpartTabs = function() {
     $elements.children().hide();
 
     function init() {
-        // Legt um alle WebParts in einem container einen Container in dem die Tabs gerendert werden soll
+        // Legt um alle Webparts in einem Container einen Container, in dem die Tabs gerendert werden sollen
         $elements.each(function() {
             $(this).find(".ms-rte-wpbox").hide().wrapAll("<div class='tabstrip' style='position: relative; height: 100%; width: 100%;'></div>");
         });
@@ -42,7 +42,7 @@ $.fn.webpartTabs = function() {
                 }
             });
 
-            // Abruf der kendoTabStrip Instanz
+            // Abruf der kendoTabStrip-Instanz
             var kendoTabStrip = $ts.data("kendoTabStrip");
             kendoTabStrip.select("li:eq(0)");
 
@@ -66,12 +66,12 @@ $.fn.webpartTabs = function() {
 
     function _load() {
 
-        // Alle benötigten ecspand center Scripte werden geladen
+        // Alle benötigten ecspand center-Skripte werden geladen
         ecspand.Prerequesite.load().done(function() {
 
             init();
 
-            // Verlässt man die Seite, so muss der Speicher ggf. explizit freigegeben werden
+            // Verlässt man die Seite, muss der Speicher ggf. explizit freigegeben werden
             $(window).unload(function() {
                 destroy();
             });
@@ -79,12 +79,12 @@ $.fn.webpartTabs = function() {
 
     }
 
-    // Sicherstellen, dass die benötigten Sharepoint Scripte geladen wurden
+    // Sicherstellen, dass die benötigten SharePoint-Skripte geladen wurden
     SP.SOD.executeOrDelayUntilScriptLoaded(function() {
-        // Soll nur dann geladen werden, wenn man sich nicht im edit modus befindet
+        // Soll nur dann geladen werden, wenn man sich nicht im Bearbeitungsmodus befindet
         if (!SP.Ribbon.PageState.Handlers.isInEditMode()) {
 
-            // Für den Fall, dass alle ecspand Scripte bereits geladen wurden
+            // Für den Fall, dass alle ecspand-Skripte bereits geladen wurden
             if (window.ecspand && window.ecspand.Prerequesite) {
                 _load();
             }

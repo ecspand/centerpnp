@@ -16,11 +16,12 @@ var Template_imageViewer_vizit = (function (_super) {
         
         if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
             
-            // Url der anzuzeigenden Datei ermitteln
+            // URL der anzuzeigenden Datei ermitteln
             this.ctx.getServerRelativeFileUrl().then(function(serverRelativeUrl) {
                 
                 // Falls es sich um ein Link-archiviertes Dokument handelt durchläuft es weiterhin die Standard-Routine
                 if (serverRelativeUrl.indexOf(".ecs") === -1) {
+
                     try {
                         // Optionen beinhalten u.a. die Information darüber wo drin der Viewer gerendert werden soll, hier wird der für die Viewer vorgesehene container ermittelt und das HTMLElement übergeben
                         var vizitOptions = { renderTo: _this.container.find(".dvContainer")[0], autoShow: true },
@@ -57,14 +58,10 @@ var Template_imageViewer_vizit = (function (_super) {
                             dfd.resolve();
                         }
                     }).fail(dfd.reject);
-                }
+                }            
             });
         }
-        else {
-            dfd.resolve();
-        }
-        
-        
+                
         return dfd.promise();
     };
     

@@ -16,13 +16,13 @@ var Template_imageViewer_video = (function(_super) {
 
         if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
 
-            // Url der anzuzeigenden Datei ermitteln
+            // URL der anzuzeigenden Datei ermitteln
             this.ctx.getServerRelativeFileUrl().then(function(serverRelativeUrl) {
 
                 var extensionIndex = serverRelativeUrl.lastIndexOf(".") + 1,
                     extension = serverRelativeUrl.substr(extensionIndex);
                 
-                // Falls es sich um eine mp4 Datei handelt, soll ein Video anstelle des DocumentViewers embeded werden
+                // Falls es sich um eine .mp4-Datei handelt, soll ein Video anstelle des DocumentViewers eingebettet werden
                 if (extension === "mp4") {
                     _this.container.find(".dvContainer").append('<embed width="100%" height="400" src="' + ecspand.Core.getServerUrl() + serverRelativeUrl + '" type="video/mp4" loop="false" autoplay="false">');
                     dfd.resolve();

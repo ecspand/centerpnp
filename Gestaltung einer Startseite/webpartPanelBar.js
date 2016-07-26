@@ -7,7 +7,7 @@ $.fn.webpartPanelBar = function() {
     $elements.children().hide();
 
     function init() {
-        // Legt um alle WebParts in einem container einen Container in dem die PanelPar gerendert werden soll
+        // Legt um alle Webparts in einem Container einen Container, in dem die PanelBar gerendert werden soll
         $elements.each(function() { 
             $(this).find(".ms-rte-wpbox").hide().wrapAll("<ul class='panelbar' style='position: relative; height: 100%; width: 100%;'></ul>");
         });
@@ -29,11 +29,11 @@ $.fn.webpartPanelBar = function() {
             
             $webparts.each(function(index, element) {
                 
-                // Zusätzlich wird noch WebpartTitel ermittelt und in das Panel als Überschrift geschrieben
+                // Zusätzlich wird noch der Webpart-Titel ermittelt und als Überschrift in das Panel geschrieben
                 var $webpart = $(this),
                     $webpartpbTitle = $webpart.find(".ms-webpart-chrome-title");
                 
-                // Zusätzlich wird noch WebpartTitel ermittelt und in das Panel als Überschrift geschrieben 
+                // Zusätzlich wird noch der Webpart-Titel ermittelt und als Überschrift in das Panel geschrieben 
                 $webpart.parent("li").prepend("<span class='k-link'>" + $webpartpbTitle.text() + "</span>");
                 $webpartpbTitle.hide();
             });
@@ -47,11 +47,11 @@ $.fn.webpartPanelBar = function() {
                 }
             });
             
-            // Abruf der kendoPanelBar Instanz
+            // Abruf der kendoPanelBar-Instanz
             var kendoPanelBar = $pb.data("kendoPanelBar");
             kendoPanelBar.select("li:eq(0)").expand("li:eq(0)");
             
-            // Panelbar nach einiger Zeit wieder einblenden
+            // PanelBar nach einiger Zeit wieder einblenden
             setTimeout(function() {
                 $pb.find("li").fadeIn();
                 throbber.hide(true);
@@ -71,12 +71,12 @@ $.fn.webpartPanelBar = function() {
     
     function _load() {
 
-        // Alle benötigten ecspand center Scripte werden geladen
+        // Alle benötigten ecspand center-Skripte werden geladen
         ecspand.Prerequesite.load().done(function() {
 
             init();
 
-            // Verlässt man die Seite, so muss der Speicher ggf. explizit freigegeben werden
+            // Verlässt man die Seite, muss der Speicher ggf. explizit freigegeben werden
             $(window).unload(function() {
                 destroy();
             });
@@ -84,12 +84,12 @@ $.fn.webpartPanelBar = function() {
 
     }
 
-    // Sicherstellen, dass die benötigten Sharepoint Scripte geladen wurden
+    // Sicherstellen, dass die benötigten SharePoint-Skripte geladen wurden
     SP.SOD.executeOrDelayUntilScriptLoaded(function() {
-    // Soll nur dann geladen werden, wenn man sich nicht im edit modus befindet
+    // Soll nur dann geladen werden, wenn man sich nicht im Bearbeitungsmodus befindet
         if (!SP.Ribbon.PageState.Handlers.isInEditMode()) {
             
-            // Für den Fall, dass alle ecspand Scripte bereits geladen wurden
+            // Für den Fall, dass alle ecspand-Skripte bereits geladen wurden
             if (window.ecspand && window.ecspand.Prerequesite) {
                 _load();
             }

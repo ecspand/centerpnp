@@ -1,9 +1,9 @@
-# Master Detail View - Seiten vertauschen #
+# Master Detail-View - Seiten vertauschen #
 
 ## Voraussetzungen ##
 
-Es muss eine bereits eine TemplateConfiguration für die jeweilige Aktenart vorhanden sein. Anschließend können
-beide Seiten (``fileCoverDefault`` und  ``tabsDefault``) einfach über den das Attribut ``ContainerSelector`` vertauscht werden. 
+Es muss bereits eine TemplateConfiguration für die jeweilige Aktenart vorhanden sein. Anschließend können
+beide Seiten (``fileCoverDefault`` und  ``tabsDefault``) einfach über das Attribut ``ContainerSelector`` vertauscht werden. 
 Hierzu werden die jeweiligen Container vertauscht: ``.contentLeft`` und ``.contentRight``
 
 ```javascript
@@ -33,7 +33,7 @@ Hierzu werden die jeweiligen Container vertauscht: ``.contentLeft`` und ``.conte
 
 ## Anpassung der Breite ##
 
-Möchte man jetzt noch die Breite der jeweiligen Seiten anpassen, so kann man dies mit folgendem CSS bewerkstelligen:
+Soll zusätzlich die Breite der jeweiligen Seiten angepasst werden, kann man dies mit folgendem CSS bewerkstelligen:
 
 ```css
 .ecsContent .contentLeft {
@@ -49,4 +49,4 @@ Möchte man jetzt noch die Breite der jeweiligen Seiten anpassen, so kann man di
 
 ## Bekannte Probleme ##
 
-Aktuell kann es hier noch Probleme beim Resizing der Seite kommen. Das Problem schaue ich mir bei Zeiten noch einmal genauer an.
+Aktuell kann es hier noch zu Problemen beim Resizing der Seite kommen. Das Problem wird demnächst noch einmal genauer analysiert.
