@@ -19,7 +19,7 @@ var Template_imageViewer_vizit = (function (_super) {
             // URL der anzuzeigenden Datei ermitteln
             this.ctx.getServerRelativeFileUrl().then(function(serverRelativeUrl) {
                 
-                // Falls es sich um ein Link-archiviertes Dokument handelt durchläuft es weiterhin die Standard-Routine
+                // Falls es sich um ein Link-Archiviertes Dokument handelt durchläuft es weiterhin die Standard-Routine
                 if (serverRelativeUrl.indexOf(".ecs") === -1) {
 
                     try {
