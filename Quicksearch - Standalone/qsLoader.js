@@ -1,4 +1,3 @@
-
 $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
 
     var selector = this.selector,
@@ -9,10 +8,10 @@ $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
 
         $container = $(selector);
         if ($container.length > 0) {
-            // Initialisierung der QuickSearch, mit dem vorgegeben Container und den übergebenen Optionen
+            // Initialisierung der Schnellsuche mit dem vorgegebenen Container und den übergebenen Optionen
             var qs = new ecspand.Controls.QuickSearch($container, quickSearchOptions);
 
-            // Falls Optionen für den Provider übergeben wurden, so werden sie hier weiter gereicht
+            // Falls Optionen für den Provider übergeben wurden, werden sie hier weitergereicht
             if (providerOptions) {
                 var provider = qs.get_provider();
                 provider.set_options(providerOptions);
@@ -31,12 +30,12 @@ $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
 
     function _load() {
 
-        // Alle benötigten ecspand center Scripte werden geladen
+        // Alle benötigten ecspand center-Skripte werden geladen
         ecspand.Prerequesite.load().done(function() {
 
             init();
 
-            // Verlässt man die Seite, so muss der Speicher ggf. explizit freigegeben werden
+            // Verlässt man die Seite, muss der Speicher ggf. explizit freigegeben werden
             $(window).unload(function() {
                 destroy();
             });
@@ -44,7 +43,7 @@ $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
 
     }
 
-    // Für den Fall, dass alle ecspand Scripte bereits geladen wurden
+    // Für den Fall, dass alle ecspand-Skripte bereits geladen wurden
     if (window.ecspand && window.ecspand.Prerequesite) {
         _load();
     }
