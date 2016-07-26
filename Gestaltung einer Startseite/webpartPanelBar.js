@@ -7,7 +7,7 @@ $.fn.webpartPanelBar = function() {
     $elements.children().hide();
 
     function init() {
-        // Legt um alle Webparts in einem Container einen Container, in dem die Panel Bar gerendert werden soll
+        // Legt um alle Webparts in einem Container einen Container, in dem die PanelBar gerendert werden soll
         $elements.each(function() { 
             $(this).find(".ms-rte-wpbox").hide().wrapAll("<ul class='panelbar' style='position: relative; height: 100%; width: 100%;'></ul>");
         });
@@ -18,7 +18,7 @@ $.fn.webpartPanelBar = function() {
         $elements.children().show();
         throbber.show();
             
-        // Legt wiederum um alle Webparts ein List-Element zur Darstellung eines Panels und initialisiert die Kendo Panel Bar 
+        // Legt wiederum um alle Webparts ein List-Element zur Darstellung eines Panels und initialisiert die kendoPanelBar 
         $panelbar.each(function(index, element) {
             var $pb = $(this),
                 $webparts = $pb.find(".ms-rte-wpbox");
@@ -38,7 +38,7 @@ $.fn.webpartPanelBar = function() {
                 $webpartpbTitle.hide();
             });
             
-            // Initialisierung der Kendo Panel Bar
+            // Initialisierung der kendoPanelBar
             $pb.kendoPanelBar({
                 animation: {
                     open: {
@@ -47,11 +47,11 @@ $.fn.webpartPanelBar = function() {
                 }
             });
             
-            // Abruf der Kendo Panel Bar-Instanz
+            // Abruf der kendoPanelBar-Instanz
             var kendoPanelBar = $pb.data("kendoPanelBar");
             kendoPanelBar.select("li:eq(0)").expand("li:eq(0)");
             
-            // Panel Bar nach einiger Zeit wieder einblenden
+            // PanelBar nach einiger Zeit wieder einblenden
             setTimeout(function() {
                 $pb.find("li").fadeIn();
                 throbber.hide(true);
