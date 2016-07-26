@@ -2,7 +2,7 @@
 
 ## Voraussetzungen ##
 
-Ableitung des ``tabsDefault`` DisplayTemplates erzeugt und zugewiesen.
+Eine Ableitung des ``tabsDefault``-DisplayTemplates wurde erzeugt und zugewiesen.
 
 ## Erweiterung des Templates ##
 
