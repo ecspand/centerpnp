@@ -16,9 +16,9 @@
  
 ## Globale Anforderungen ##
 
-* SocialFeed Button muss überall hinzugefügt werden
+* Social Feed-Button muss überall hinzugefügt werden
 * Eigenschaften sollen überall automatisch aufgeklappt werden
-* QuickSearch muss überall im Aktenplan gleich konfiguriert werden
+* Schnellsuche muss überall im Aktenplan gleich konfiguriert werden
 
 ## Spezielle Anforderungen ##
 
@@ -26,7 +26,7 @@
  * Button -> Workflow starten
 * Akte
  * Button -> Workflow starten
- * Tab hinzufügen -> bing
+ * Tab hinzufügen -> Bing
 * Dokumente
  * Button -> Organisieren & Favoriten
 * Sonderdokumente
@@ -37,7 +37,7 @@
  * Button -> Workflow starten
 * Akte (Lieferant)
  * Button -> Workflow starten
- * Tab hinzufügen -> bing
+ * Tab hinzufügen -> Bing
  * Button -> Edit ausblenden
 
 
@@ -54,16 +54,16 @@ Daraus resultierende Templates und Zuweisungen (eine von vielen Möglichkeit)
 * masterData_global
  * + Eigenschaften werden automatisch aufgeklappt
 * tabs_global
- * Keine Änderungen – jedoch kann es für zukünftige Änderungen sinn machen, immer mit einer globalen Ableitung zu arbeiten (z.B. als Basisklasse für Hilfsmethoden etc.)
+ * Keine Änderungen – jedoch kann es für zukünftige Änderungen sinnvoll sein, immer mit einer globalen Ableitung zu arbeiten (z.B. als Basisklasse für Hilfsmethoden etc.)
 <br/><br/>
 
 * tabs_global_akte
- * + Tab für Bing Suche hinzufügen
+ * + Tab für Bing-Suche hinzufügen
 * menu_global_akte
- * + Button Workflow start
+ * + Button Workflow Start
 * menuDokument_global_dokumente
  * + Button Organisieren
- * + Button Dokumentkorb
+ * + Button Dokumentenkorb
 * menuDokument_global_dokument_sonderdokument
  * - Original Edit Button entfernen
 + Button Edit (nur sichtbar für einen bestimmten Kunden)
