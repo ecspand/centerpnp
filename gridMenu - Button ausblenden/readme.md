@@ -2,7 +2,7 @@
 
 ## Voraussetzungen ##
 
-Da das ``gridMenu`` aktuell nicht offiziell für Anpassungen freigegeben wurde (kein Konfigurator vorhanden), muss 
+Da das ``gridMenu`` für Anpassungen noch nicht offiziell freigegeben wurde (kein Konfigurator vorhanden), muss 
 zunächst manuell eine Ableitung des Templates mit Hilfe des ``derivation``-Templates erstellt werden. 
 
 Des Weiteren wird das ``gridMenu``-Template automatisch vom ``grid-Template`` geladen, weshalb es nicht automatisch in der
@@ -16,7 +16,7 @@ des angezeigten Kind-Elementes angezogen wird und nicht aus der Konfiguration de
 - Kundenakte
  - Aufträge 
 >
-Ist hier die Kundenakte geöffnet und es soll unter dem Tab "Aufträge" etwas ausgeblendet werden,
-so muss das Template in der FileConfiguration der "Aufträge" Akte eingebunden werden.
+Ist hier die Kundenakte geöffnet und es soll unter dem Tab "Aufträge" etwas ausgeblendet werden, 
+muss das Template in der FileConfiguration der "Aufträge" Akte eingebunden werden.
  
 
