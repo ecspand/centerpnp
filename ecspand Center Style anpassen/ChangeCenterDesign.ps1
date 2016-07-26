@@ -1,15 +1,15 @@
 #
 ###############################################################################################################################
-# Bitte ausf¸llen
+# Bitte ausf√ºllen
 #
-# Geben Sie hier die neuen Farbwerte an. Wichtig achten Sie auf die Darstellung Hex und RGB
-# Die Beiden CSS Dateien Fileview und Kendoo werden zusammengefasst um diese Sp‰ter in der Inhaltskonfiguration des Centers nachzuladen
+# Geben Sie hier die neuen Farbwerte an. Wichtig: Achten Sie auf die Darstellung Hex und RGB
+# Die beiden CSS-Dateien Fileview und Kendo werden zusammengefasst, um diese sp√§ter in der Inhaltskonfiguration des Centers nachzuladen
 $Color1New = "005da8" # Hex
 $Color2New = "0,93,168" # RGB
 $Color3New = "156,206,240" # RGB
 $Color4New = "153,199,232" # RGB
 
-# Geben Sie hier den Pfad der beiden ecspand Center CSS - Dateien an
+# Geben Sie hier den Pfad der beiden ecspand Center CSS-Dateien an
 $CssDateiPfadFielView = "C:\ecspandDesign\Styles\FileView.min.css"
 $CssDateiPfadKendo = "C:\ecspandDesign\Styles\kendo.ecspand.min.css"
 
@@ -18,7 +18,7 @@ $CssDateiPfadKendo = "C:\ecspandDesign\Styles\kendo.ecspand.min.css"
 
 ################################################################################################################################
 ################################################################################################################################
-# Nicht ver‰ndern
+# Nicht ver√§ndern
 #
 # Initialisierung der Farben
 $Color1 = "0072c6"
