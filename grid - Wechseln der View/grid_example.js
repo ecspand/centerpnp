@@ -53,6 +53,25 @@ var Template_grid_example = (function (_super) {
         return dfd.promise();
     };
 
+    // BEISPIEL: kendo Tooltips 
+    // onGridDataBound wird jedes mal aufgerufen wenn neue Daten gebunden wurden - Paging, Filterung, ...
+    Template_grid_example.prototype.onGridDataBound = function () {
+        _super.prototype.onGridDataBound.call(this);
+        
+        // kendo Tooltips müssen nur einmalig gebunden werden, entsprechend nur, wenn die Daten des Grids das erste mal geladen wurden
+        if (!this.dataBound) {
+            this.container.kendoTooltip({
+                filter: "tr td:nth-child(2)"
+            });
+        }
+        
+        // Jedes mal wenn neue Daten gebunden wurden, wird über die zweiten Columns des Grids iteriert und der Inhalt dessen als Tooltip ("title"-Attribut) gespeichert  
+        this.container.find("tr td:nth-child(2)").each(function(index, item) {
+            var $item = $(item);
+            $item.attr("title", $item.html());
+        });
+    };
+
     Template_grid_example.prototype.destroy = function () {
         _super.prototype.destroy.call(this);
     };
