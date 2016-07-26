@@ -3,30 +3,30 @@
 ## Voraussetzungen ##
 
 Die Datei ``qsloader.js`` verpackt die nötigen Schritte zum Laden 
-aller ecspand center Komponenten in einen bequemen jQuery 
-Aufruf und muss zuvor in einer für jeden lesbaren SharePoint 
+aller ecspand center-Komponenten in einen bequemen jQuery-
+Aufruf und muss zuvor in einer für jeden lesbaren SharePoint-
 Bibliothek abgelegt werden.
 
-Alles weitere kann in einem Script-Editor Webpart untergebracht werden.
+Alles weitere kann in einem Skript Editor-Webpart untergebracht werden.
 
 ```html
-// Laden des Scripts
+// Laden des Skriptes
 <script src="http://mysharepoint/scripts/qsLoader.js"></script>
 
-// Definition der Container in denen die QuickSearch geladen werden soll
+// Definition der Container, in denen die Schnellsuche geladen werden soll
 <div id="quickSearchOne"></div>
 <div id="quickSearchTwo"></div>
 
-// Alles weitere erfolgt in einem Script Tag
+// Alles weitere erfolgt in einem Script-Tag
 <script>
     ...
 </script>
 ```
 
 ```javascript
-// Warten bis die Seite vollständig geladen wurde
+// Warten, bis die Seite vollständig geladen wurde
 $(function() {
-       // Initialisierung der QuickSearch mit den gewünschten Optionen
+       // Initialisierung der Schnellsuche mit den gewünschten Optionen
        $("#quickSearchOne").ecspandQuickSearch({ redirectToFileView: true}, { 
            titleFormats: [{"contentTypeIDorListID": "0x01", formatString: "{Title} - ({ecsContentType}) | {CreatedOWSDate}"}], 
            additionalSelectProperties: ["ecsContentType", "CreatedOWSDate"],
@@ -46,7 +46,7 @@ $(function() {
 						if (match && match.length > 0) {
 							var date = null;
 							try {
-                                // Nur das erste gefundene Dateum wird ersetzt
+                                // Nur das erste gefundene Datum wird ersetzt
 								var d = new Date(match[0]),
 									day = d.getDay().toString();
 
@@ -55,7 +55,7 @@ $(function() {
 							}
 							catch(exp) {}
 
-                            // Dateum ersetzen und Titel zurück in das results Array schreiben
+                            // Datum ersetzen und Titel zurück in das results Array schreiben
 							if (date) {
 								results[i].title = title.replace(re, date);
 							}
@@ -77,12 +77,12 @@ $(function() {
  * redirectUrl?: string - falls auf eine andere Seite weitergeleitet werden soll;
  * openModal?: boolean - falls die FileView in einem modalen Dialog geöffnet werden soll;
 * Zweiter Parameter - ecspand.Controls.QuickSearchSPSearchApiProviderOptions
- * sourceID?: string - Guid einer Suchergebnisquelle um die Suche serverseitig einzuschränken;
- * usePrefixWildcard?: boolean - true falls immer mit angeführtem * gesucht werden soll - standard: false;
- * useSuffixWildcard?: boolean - true falls immer mit nachfolgendem * gesucht werden soll - standard: false;
- * additionalSelectProperties?: Array<string> - weitere Parameter (Managed Metadata) die abgerufen werden sollen 
+ * sourceID?: string - Guid einer Suchergebnisquelle, um die Suche serverseitig einzuschränken;
+ * usePrefixWildcard?: boolean - true, falls immer mit angeführtem * gesucht werden soll - standard: false;
+ * useSuffixWildcard?: boolean - true, falls immer mit nachfolgendem * gesucht werden soll - standard: false;
+ * additionalSelectProperties?: Array<string> - weitere Parameter (Managed Metadata), die abgerufen werden sollen 
  * filterResults?: (results: Array<QuickSearchResult>) => Array<QuickSearchResult> - Die intern formatierten Suchergebnisse können hier nachträglich vor der Anzeige manipuliert werden
- * titleFormats?: Array<TitleFormat> - hiermit ist es möglich ein format pro contenttypeguid/listguid anzugeben. 
+ * titleFormats?: Array<TitleFormat> - hiermit ist es möglich, ein format pro contenttypeguid/listguid anzugeben. 
        > Im Standard verfübare Platzhalter: {Title}, {ListItemID}, {ListID}, {SPSiteURL}, {WebID}
        > <br/>Weitere Platzhalter müssen in den additionalSelectProperties angegeben werden
  
