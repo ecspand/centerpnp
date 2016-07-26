@@ -5,7 +5,7 @@
 
 ### Einleitung ###
 
-Die ecspand center patterns & practices bieten Beispiele und Best Practices zu den gefragtesten Themen. Wir versuchen an dieser Stelle regelmäßig weitere, interessante Beispiele bereitzustellen. Diese Beispiele sollen auch als Grundlage und Anregung für eigene Ideen dienen.
+Die ecspand center patterns & practices bieten Beispiele und Best Practices zu den gefragtesten Customizing-Themen. Wir versuchen an dieser Stelle regelmäßig weitere, interessante Beispiele bereitzustellen. Diese Beispiele sollen auch als Grundlage und Anregung für eigene Ideen dienen.
 
 ### Wie arbeite ich mit den Projekten? ###
 
