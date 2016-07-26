@@ -3,16 +3,16 @@
 ## Voraussetzungen ##
 
 * Aktenstruktur sollte mehr oder weniger final sein
-* Zu bereitstellende Funktionalitäten in den einzelnen Akten sollte bekannt sein
+* Bereitzustellende Funktionalitäten in den einzelnen Akten sollten bekannt sein
 * Layout/Aufbau/Design des centers sollten abgestimmt worden sein (fortgeschritten) 
 
 ## Weitere Überlegungen ##
 
 * Bauen einige Aktenarten aufeinander auf?
-* Gibt es zu implementierende Funktionalitäten die überall vorhanden sein müssen?
-* Gibt es Sonderfälle die nicht im Standard abgedeckt werden können? 
-* Gibt es eventuell elegantere Möglichkeiten ein Problem zu lösen?
-* Stoße ich auf irgendwelche Grenzen oder kann ich ein Problem vielleicht doch selbst lösen?
+* Gibt es zu implementierende Funktionalitäten, die überall vorhanden sein müssen?
+* Gibt es Sonderfälle, die nicht im Standard abgedeckt werden können? 
+* Gibt es eventuell elegantere Möglichkeiten, um ein Problem zu lösen?
+* Stoße ich an irgendwelche Grenzen oder kann ich ein Problem vielleicht doch selbst lösen?
 
 
 ## Aktenplan ##
@@ -27,7 +27,7 @@
  
 ## Problem ##
 
-Allen Akten muss ein Button zum Starten eines bestimmten Workflows hinzugefügt werden. Es handelt sich hierbei immer um den selben Workflow.
+Allen Akten muss ein Button zum Starten eines bestimmten Workflows hinzugefügt werden. Es handelt sich hierbei immer um denselben Workflow.
 
 ## Lösung ##
 
