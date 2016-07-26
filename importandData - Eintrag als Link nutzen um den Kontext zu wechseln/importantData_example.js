@@ -71,24 +71,24 @@ var Template_importantData_example = (function (_super) {
     Template_importantData_example.prototype.onFieldClick = function(value) {
         
         var self = this;
-        // Einfachs Beispiel - externe Seite aufrufen
+        // Einfaches Beispiel - externe Seite aufrufen
         // location.href = "http://www.bing.com?q=" + value;
         
-        // Komplexes Beispiel - ElementContext abrufen und in das Element (MasterDetailView) abspringen
+        // Komplexes Beispiel - Element-Kontext abrufen und in das Element (MasterDetailView) abspringen
         
         // Im Beispiel beinhaltet das Feld "Kundennummer" eine ID (number) zu einem anderen Element in derselben Liste
         var itemID = parseInt(value);
         
-        // Abruf des Contextes mittels siteUrl, webRelativeUrl, listID und itemID
-        // roID ist optional, wird diese nicht übergeben, wird die des aktuellen Contextes genommen
+        // Abruf des Kontextes mittels siteUrl, webRelativeUrl, listID und itemID
+        // roID ist optional, wird diese nicht übergeben, wird die des aktuellen Kontextes genommen
         ecspand.SPObjectContainer.getCurrent().getElementContext(
             this.ctx.get_site().get_url(), this.ctx.get_webRelativeUrl(), this.ctx.get_list().get_id(), itemID, this.ctx.get_roID())
             .done(function(newCtx) {
         
-                // args vom Typ ecspand.Args.ElementSelectedArgs zum wechseln des Contextes
+                // args vom Typ ecspand.Args.ElementSelectedArgs zum Wechseln des Kontextes
                 var args = {
                     element: newCtx, // Das Element, das in der MasterDetail-View angezeigt werden soll
-                    folder: self.folder, // Der Ordner aus dem das Element selektiert wurde
+                    folder: self.folder, // Der Ordner, aus dem das Element ausgewählt wurde
                     viewType: ecspand.Args.ElementSelectedViewType.File // File == MasterDetailView, Folder == FolderView
                 };
                 
