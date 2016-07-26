@@ -5,7 +5,7 @@
 
 ### Einleitung ###
 
-ecspand center patterns & practices bieten euch Beispiele und Best Practices zu den gefragtesten Themen. Wir werden versuchen regelmäßig interessante Beispiele bereitzustellen und hoffen euch damit auch Anregung für eigene Ideen geben zu können.
+Die ecspand center patterns & practices bieten Beispiele und Best Practices zu den gefragtesten Themen. Wir versuchen an dieser Stelle regelmäßig weitere, interessante Beispiele bereitzustellen. Diese Beispiele sollen auch als Grundlage und Anregung für eigene Ideen dienen.
 
 ### Wie arbeite ich mit den Projekten? ###
 
@@ -14,15 +14,15 @@ ecspand center patterns & practices bieten euch Beispiele und Best Practices zu 
 
 #### Vorgehen ####
 
-Erstellt euch einen Clone und am besten einen eigenen Branch an dem ihr rumexperimentieren könnt. Das Projekt bietet euch Intellisense, 
-mit einer ausnahmen: direkt in den Klassen habt ihr per Intellisense keinen Zugriff auf auf Instanzmethoden oder Instanzvariablen, dies bietet Visual Studio Code aktuell nicht.
+Erstellen Sie zunächst einen Clone und idealerweise auch einen eigenen Branch, an dem Sie frei experimentieren und probieren können. Das Projekt bietet Ihnen Intellisense, 
+mit einer Ausnahme: direkt in den Klassen haben  Sie per Intellisense keinen Zugriff auf Instanzmethoden oder Instanzvariablen - dies bietet Visual Studio Code aktuell leider nicht.
 <br/><br/>
 
-Möchtet ihr auf dem Laufenden bleiben so abonniert dieses Projekt am besten. Wir werden nach und nach weitere Patterns und Practices bereitstellen.
+Wenn Sie auf dem Laufenden bleiben möchten, empfehlen wir dieses Projekt zu abonnieren. Wir versuchen, wie bereits erwähnt, nach und nach weitere Patterns und Practices bereitstellen.
 
 #### Merge Requests und neue Patterns und Practices ####
-Habt ihr selbst Ideen die es wert sind sie mit anderen zu teilen, könnt ihr diese als Merge Request einstellen. Wir schauen uns diese an, optimieren ggf. etwas, und fügen sie dem Projekt hinzu.
-* Zu jedem neuen Projekt gehört eine ausführliche beschreibung die ihr mittels [Mardown](http://markdowntutorial.com/) erstellen müsst. 
+Haben Sie selbst interessante Ideen, die mit anderen geteilt werden sollten? Dann können Sie diese als Merge Request einstellen. Wir schauen uns Ihre Ideen an, optimieren ggf. etwas und fügen sie dem Projekt hinzu.
+* Zu jedem neuen Projekt gehört eine ausführliche Beschreibung, die mittels [Markdown](http://markdowntutorial.com/) erstellen werden muss. 
 
 ## Disclaimer ##
 
