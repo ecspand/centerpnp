@@ -21,17 +21,17 @@ var Template_menuDocument_global_dokumente_sonderdokumente = (function (_super) 
         _super.prototype.init.call(this).done(function () {
             if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
                 
-                // Neue Options für den btnNewEdit Button erstellen
+                // Neue Optionen für den btnNewEdit Button erstellen
                 _this.btnNewEditOptions = {
                     // enabled Methode implementieren - erwartet wird ein promise mit boolean Rückgabewert
                     enabled: function() {
                         
                         var optionsDfd = $.Deferred();
                         
-                        // Kunde aus dem view model auslesen
+                        // Kunde aus dem View Model auslesen
                         var value = _this.ctx.get_viewModel()["Kunde"].value;
                         
-                        // Der Button soll nur eingeblendet werden für den Kunden "Motor Presse Stuttgart"
+                        // Der Button soll nur für den Kunden "Motor Presse Stuttgart" eingeblendet werden 
                         optionsDfd.resolve(value === "Motor Presse Stuttgart");
                         
                         return optionsDfd.promise();
