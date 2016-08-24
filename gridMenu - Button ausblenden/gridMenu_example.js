@@ -24,7 +24,7 @@ var Template_gridMenu_example = (function (_super) {
                 // ---[ELEMENTS-BLOCK-START]---
                 // ---[ELEMENTS-BLOCK-END]---
                 
-                // Erst hier ist einigermaßen sicher, dass der die Schaltfläche an der Oberfläche gebunden wurde
+                // Erst hier ist einigermaßen sicher, dass die Schaltfläche an der Oberfläche gebunden wurde
                 $("#btnGridMenuShowList").hide();
                 
                 // Alternativ können die Elemente auch direkt aus dem viewModel geworfen werden 

@@ -14,8 +14,8 @@ var Template_tabs_kunde = (function (_super) {
         var dfd = $.Deferred();
         var self = this;
         
-        // Dem äußersten Container eine eindeutige CSS Klasse hinzufügen - hier wird immer der Titel der aktuellen Aktenart vergeben 
-        // Falls Sonderzeichen vorkommen sollten, so sollte ein fester Name vergeben werden
+        // Dem äußersten Container eine eindeutige CSS-Klasse hinzufügen - hier wird immer der Titel der aktuellen Aktenart vergeben 
+        // Falls Sonderzeichen vorkommen, sollte ein fester Name vergeben werden
         $(".ecsContent").addClass(this.folder.get_title());
         
         _super.prototype.init.call(this).done(function () {
@@ -33,7 +33,7 @@ var Template_tabs_kunde = (function (_super) {
     };
     Template_tabs_kunde.prototype.destroy = function () {
         
-        // Klasse wieder entfernen sobald die aktuelle Ansicht verlassen wird    
+        // Klasse wieder entfernen, sobald die aktuelle Ansicht verlassen wird    
         $(".ecsContent").removeClass(this.folder.get_title());
         _super.prototype.destroy.call(this);
     };

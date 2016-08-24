@@ -26,9 +26,9 @@ var Template_importantData_example = (function (_super) {
         return dfd.promise();
     };
     
-    // Die format Methode wird automatisch nach der Initialisierung der Elemente aufgerufen
+    // Die format-Methode wird automatisch nach der Initialisierung der Elemente aufgerufen
     Template_importantData_example.prototype.format = function () {
-        // Aufruf der format Methode aus der Basis-Klasse (Template_importantData)
+        // Aufruf der format-Methode aus der Basis-Klasse (Template_importantData)
         _super.prototype.format.call(this);
            
         if (this.ctx) {
@@ -41,11 +41,11 @@ var Template_importantData_example = (function (_super) {
                 value = null,
                 $element = null;
             
-            // Falls das Feld nicht exisiert wird die Behandlung übersprungen
+            // Falls das Feld nicht exisiert, wird die Behandlung übersprungen
             if (field) {
                 value = field.value; 
                 
-                // wenn der Wert dem gewünschten Wert übereinstimmt
+                // wenn der Wert mit dem gewünschten Wert übereinstimmt
                 if (value === caseValue) {
                     
                     // Den Container des Elementes mit dem displayName des Feldes finden
@@ -58,7 +58,7 @@ var Template_importantData_example = (function (_super) {
                         textDecoration: "underline" 
                     })
                     
-                    // Um eventuellen Speicherlecks vorzubeugen wird die click-Methode 
+                    // Um eventuellen Speicherlecks vorzubeugen, wird die click-Methode 
                     // ausgelagert und die benötigten Parameter als zweiter Parameter der Bind-Methode übergeben
                     $element.click(this.onFieldClick.bind(this, value));
                     
@@ -71,28 +71,28 @@ var Template_importantData_example = (function (_super) {
     Template_importantData_example.prototype.onFieldClick = function(value) {
         
         var self = this;
-        // Einfachs Beispiel - externe Seite aufrufen
+        // Einfaches Beispiel - externe Seite aufrufen
         // location.href = "http://www.bing.com?q=" + value;
         
-        // Komplexes Beispiel - ElementContext abrufen und in das Element (MasterDetailView) abspringen
+        // Komplexes Beispiel - Element-Kontext abrufen und in das Element (MasterDetailView) abspringen
         
-        // Im Beispiel beinhaltet das Feld "Kundennummer" eine ID (number) zu einem anderen Element in der selben Liste
+        // Im Beispiel beinhaltet das Feld "Kundennummer" eine ID (number) zu einem anderen Element in derselben Liste
         var itemID = parseInt(value);
         
-        // Abruf des Contextes mittels siteUrl, webRelativeUrl, listID und itemID
-        // roID ist optional, wird diese nicht übergeben wird die des aktuellen Contextes genommen
+        // Abruf des Kontextes mittels siteUrl, webRelativeUrl, listID und itemID
+        // roID ist optional, wird diese nicht übergeben, wird die des aktuellen Kontextes genommen
         ecspand.SPObjectContainer.getCurrent().getElementContext(
             this.ctx.get_site().get_url(), this.ctx.get_webRelativeUrl(), this.ctx.get_list().get_id(), itemID, this.ctx.get_roID())
             .done(function(newCtx) {
         
-                // args vom Typ ecspand.Args.ElementSelectedArgs zum wechseln des Contextes
+                // args vom Typ ecspand.Args.ElementSelectedArgs zum Wechseln des Kontextes
                 var args = {
-                    element: newCtx, // Das Element welches in der MasterDetail View angezeigt werden soll
-                    folder: self.folder, // Der Ordner aus dem das Element selektiert wurde
+                    element: newCtx, // Das Element, das in der MasterDetail-View angezeigt werden soll
+                    folder: self.folder, // Der Ordner, aus dem das Element ausgewählt wurde
                     viewType: ecspand.Args.ElementSelectedViewType.File // File == MasterDetailView, Folder == FolderView
                 };
                 
-                // Event wird gefeuert und von der obsersten Instanz abgefangen um anschließend den Context neu zu setzen
+                // Event wird gefeuert und von der obersten Instanz abgefangen, um anschließend den Kontext neu zu setzen
                 self._trigger("select", args);
             });
     };
