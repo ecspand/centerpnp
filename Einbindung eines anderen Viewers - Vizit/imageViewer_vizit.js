@@ -66,6 +66,10 @@ var Template_imageViewer_vizit = (function (_super) {
     };
     
     Template_imageViewer_vizit.prototype.destroy = function () {
+
+        // Zerstört alle erstellen Vizit Instanzen
+        Vizit.Essential.Manager.Clear();
+
         _super.prototype.destroy.call(this);
     };
     
