@@ -27,7 +27,9 @@ var Template_imageViewer_vizit = (function (_super) {
                         var vizitOptions = { renderTo: _this.container.find(".dvContainer")[0], autoShow: true },
                             // Für die Ermittlung des Elementes benötigt der Vizit Viewer lediglich die absolute URL der Datei
                             itemObject = { url: ecspand.Core.getServerUrl() + serverRelativeUrl };
-                            
+                            // alternativ mittels ListId und ItemID (evtl nur im aktuellen Web möglich)
+                            // itemObject = { list: _this.ctx.get_list().get_id().toString(), item: _this.ctx.get_listItem().get_id().toString() };
+
                         // Viewer erstellen (für weitere Informationen siehe http://files.vizit.com/public/docs/4.0/symbols/Vizit.Essential.Manager.html)
                         Vizit.Essential.Manager.Create("centerVizit", vizitOptions);
                         // Setzen des Items
