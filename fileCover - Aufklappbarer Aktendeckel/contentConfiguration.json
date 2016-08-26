@@ -1,0 +1,55 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "http://mysharepoint/Scripts/styles.css",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+            {
+                "Name": "fileCover",
+                "ClassName": "Template_fileCover_expand",
+                "FileName": "fileCover_expand",
+                "Inherits": "fileCoverDefault",
+                "ContainerSelector": ".contentLeft",
+                "IsDefault": false,
+                "Editable": true
+            }
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "IsDefault": false,
+                    "FileName": "contentDefault",
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCover_expand",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "menuDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterDataDefault"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "quickSearchDefault"
+                        },
+                        {
+                            "FileName": "tabsDefault"
+                        }
+                    ],
+                    "CMID": "Akte"
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+

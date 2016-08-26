@@ -1,0 +1,70 @@
+
+.fileCoverPanel {
+	display: table-row;
+}
+
+.fileCoverPanel .title {
+	display: table-cell; 
+	border: 1px solid lightgray; 
+	height: 200px; 
+	vertical-align: middle; 
+	cursor: pointer;
+}
+
+.fileCoverPanel .title span {
+	transform: rotate(90deg); 
+	top: -20%; 
+	display:block; 
+	position: relative; 
+	font-size: 1.6em; 
+	width: 40px;
+}
+
+.fileCoverPanel .container {
+	display: table-cell; 
+	vertical-align: top;
+}
+
+.fileCoverPanel .container .hiddenContainer {
+	display: none;
+}
+
+/* Grundlegende Änderungen am Verhalten des Content-Bereichs */
+.contentInner {
+	display: table-row !important;
+	vertical-align: top;
+} 
+
+.contentInner .contentLeft {
+	float: none !important;
+	width: auto !important;
+	display: table-cell !important;
+	vertical-align: top !important;
+}
+
+.contentInner .contentLeft .primaryContainer {
+	min-width: 350px;
+}
+
+.contentInner .contentRight {
+	float: none !important;
+	right: 0px !Important;
+	width: auto !important;
+	display: table-cell !important;
+	vertical-align: top !important;
+}
+
+.contentInner .contentRight .k-tabstrip-wrapper {
+	max-width: 98% !important;
+	left: 1% !important;
+	position: relative;
+}
+
+.contentInner .contentRight .gridContainer {
+	width: 100% !important;
+}
+
+.ecsContent {
+	display: table;
+	table-layout: auto;
+}
