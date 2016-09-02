@@ -2,6 +2,7 @@
 
 ## Voraussetzungen ##
 
+* ecspand 3.1.0.11
 * Vizit Viewer (gestete Version v6.3.0.1896)
 
 Da das ``imageViewer``-DisplayTemplate aktuell nicht offiziell für Anpassungen freigegeben wurde (kein Konfigurator vorhanden), muss 
