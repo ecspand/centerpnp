@@ -1,0 +1,57 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+            {
+                "Name": "grid",
+                "ClassName": "Template_grid_example",
+                "FileName": "grid_example",
+                "Inherits": "gridDefault",
+                "IsDefault": false,
+                "Editable": true
+            }
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "CMID": "Vertraege",
+                    "FileName": "contentDefault",
+                    "IsDefault": false,
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "menuDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterDataDefault"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "quickSearchDefault"
+                        },
+                        {
+                            "FileName": "tabsDefault"
+                        },
+                        {
+                            "FileName": "grid_example"
+                        }
+                    ]
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+
