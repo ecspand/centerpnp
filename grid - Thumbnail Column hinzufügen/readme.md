@@ -23,6 +23,6 @@ muss das Template in der FileConfiguration der "Aufträge" Akte eingebunden werd
  
 
 ## Bekannte Probleme ##
-> Timout ist nötig, da es sonst zu einer Exception kommt, die anschließend das Paging verhindert
-> Beim wechseln der View verschwindet die Thumbnail column aktuell
-> Url zur Bibliothek muss aktuell noch vorgegeben werden
+* Timout ist nötig, da es sonst zu einer Exception kommt, die anschließend das Paging verhindert
+* Beim wechseln der View verschwindet die Thumbnail column aktuell
+* Url zur Bibliothek muss aktuell noch vorgegeben werden
