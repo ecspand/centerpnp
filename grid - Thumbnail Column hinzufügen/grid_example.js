@@ -56,10 +56,20 @@ var Template_grid_example = (function (_super) {
     Template_grid_example.formatThumbnail = function(data, field) {
 
         var template = '<img src="{0}" style="height: 150px" onload="SP.ScriptHelpers.resizeImageToSquareLength(this, 150)"/>',
+            thumbnailExists = data["ThumbnailExists"],
+            thumbnailExistsValue = thumbnailExists && thumbnailExists.value && (thumbnailExists.value === "Ja" || thumbnailExists.value === "Yes") ? true : false,
+            fileDirRef = data["FileDirRef"],
+            fileDirRefValue = fileDirRef && fileDirRef.value ? fileDirRef.value : "",
+            siteUrl = data["_siteUrl"],
             item = data[field],
             value = item && item.value ? item.value : "";
         
-        return template.format("http://mpaw-vs2012-01/Bildbib/_w/" + value.replace(/\./g, "_") + ".jpg");
+        if (thumbnailExistsValue) {
+            return template.format(siteUrl + fileDirRefValue + "/_w/" + value.replace(/\./g, "_") + ".jpg");
+        }
+        else {
+            return template.format("/_layouts/15/images/256_icgen.png");
+        }
         
     };
 
