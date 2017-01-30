@@ -38,7 +38,7 @@ $.fn.ecspandHoverPanel = function() {
                             
                             // Ein neuer Container für die Darstellung des Document Viewers wird erstellt. Die Größe kann beliebig gewählt werden.
 							var div = $("<div>").width("500px").height("600px");
-                            
+                            // Container wird dem HoverPanel hinzugefügt
 							hpTemp.setContent(div);
                             
 							var dv = new ecspand.Controls.DocumentViewer(div, {});
