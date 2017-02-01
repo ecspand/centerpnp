@@ -11,12 +11,27 @@ Die ecspand center patterns & practices bieten Beispiele und Best Practices zu d
 
 #### Software ####
 * [Visual Studio Code](https://code.visualstudio.com/)
+* [NodeJS + npm](https://nodejs.org)
 
 #### Vorgehen ####
 
 Erstellen Sie zunächst einen Clone und idealerweise auch einen eigenen Branch, an dem Sie frei experimentieren und probieren können. Das Projekt bietet Ihnen Intellisense, 
 mit einer Ausnahme: direkt in den Klassen haben  Sie per Intellisense keinen Zugriff auf Instanzmethoden oder Instanzvariablen - dies bietet Visual Studio Code aktuell leider nicht.
-<br/><br/>
+
+#### Arbeiten mit TypeScript
+Wenn Sie mit TypeScript arbeiten möchten führen Sie folgende Schritte aus:
+
+* Öffnen Sie in Visual Studio Code die Konsole mittels **Strg + ö** und
+* geben Sie den Befehl ``` npm init ``` ein.
+* Anschließend geben Sie den Befehl ``` npm install gulp-cli --save ``` ein.
+
+Der TypeScript-Kompiler und Gulp werden dadurch automatisch heruntergeladen und eingerichtet. Soll eine TypeScript Datei kompiliert werden
+* öffnen Sie die Datei **gulpfile.json** und
+* tragen die Ordner der TypeScript-Dateien innerhalb der Variable **paths** ein.
+
+Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden.
+
+<br /><br />
 
 Wenn Sie auf dem Laufenden bleiben möchten, empfehlen wir dieses Projekt zu abonnieren. Wir versuchen, wie bereits erwähnt, nach und nach weitere Patterns und Practices bereitstellen.
 
