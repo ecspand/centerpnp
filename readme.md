@@ -26,8 +26,8 @@ Wenn Sie mit TypeScript arbeiten möchten führen Sie folgende Schritte aus:
 * Anschließend geben Sie den Befehl ``` npm install gulp-cli --save ``` ein.
 
 Der TypeScript-Kompiler und Gulp werden dadurch automatisch heruntergeladen und eingerichtet. Soll eine TypeScript Datei kompiliert werden
-* öffnen Sie die Datei **gulpfile.json** und
-* tragen die Ordner der TypeScript-Dateien innerhalb der Variable **paths** ein.
+* öffnen Sie die Datei **tsconfig.json** und
+* tragen die Ordner der TypeScript-Dateien innerhalb von **files** ein.
 
 Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden.
 
