@@ -125,3 +125,6 @@ $RECYCLE.BIN/
 .DS_Store
 
 node_modules
+Report.html
+.vscode/
+.src/
