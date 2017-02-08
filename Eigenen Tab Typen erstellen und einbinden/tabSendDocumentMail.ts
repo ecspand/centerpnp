@@ -9,105 +9,47 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 
     private charts = [{
             chartTitle: "Area",
-            chartID: "area"
+            chartType: "area"
         },{
             chartTitle: "Bar",
-            chartID: "bar"
+            chartType: "bar"
         },{
             chartTitle: "Bubble",
-            chartID: "bubble"
+            chartType: "bubble"
         },{
             chartTitle: "Bullet",
-            chartID: "bullet"
+            chartType: "bullet"
         },{
             chartTitle: "Donut",
-            chartID: "donut"
+            chartType: "donut"
         },{
             chartTitle: "Funnel",
-            chartID: "funnel"
+            chartType: "funnel"
         },{
             chartTitle: "Line",
-            chartID: "line"
+            chartType: "line"
         },{
             chartTitle: "Pie",
-            chartID: "pie"
+            chartType: "pie"
         },{
             chartTitle: "Polar",
-            chartID: "polar"
+            chartType: "polar"
         },{
             chartTitle: "Radar",
-            chartID: "radar"
+            chartType: "radar"
         },{
             chartTitle: "Scatter",
-            chartID: "scatter"
-        }];
+            chartType: "scatter"
+        }
+    ];
 
     constructor(template: ecspand.Templates.TemplateBase, vm: any, tabStrip: ecspand.Controls.TabStrip, options?: ecspand.Templates.ElementBaseOptions) {
         super(template, vm, options);
         this.tabStrip = tabStrip;
 
-        $(document.body).append(
-            `<script id="elementTabsTestDefault-Template" type="text/x-kendo-template">
-                <div class="templateConfigurator" style="width: 100%; min-width: 600px">
-                    <div style="min-height: 300px; width: 100%">
-                        <h2 style="margin-top: 8px; margin-left: 20px">Einstellungen für den Tab</h2>
-                        <table style="width: 97%; margin: 10px 0px 10px 0px;">
-                            <tr class="formItem display">
-                                <td class="name">
-                                    <span class="displayName">Name des Tabs</span>
-                                    <div class="description">Beschreibung des Tabs</div>
-                                </td>
-                                <td class="value">
-                                    <input type="text" data-bind="enabled: minimalEnabled, value: customTitle, attr: { placeholder: title }" />
-                                </td>
-                            </tr>
-                            <tr class="formItem display">
-                                <td class="name">
-                                    <span class="displayName">Diagramm Typ</span>
-                                    <div class="description">Art des Diagramms</div>
-                                </td>
-                                <td class="value">
-                                    <input data-role="dropdownlist"
-                                        data-text-field="chartTitle"
-                                        data-value-field="chartID"
-                                        data-bind="value: selectedChart, source: charts"
-                                        style="width: 100%" />
-                                </td>
-                            </tr>
-                            <tr class="formItem display">
-                                <td class="name">
-                                    <span class="displayName">Datenquelle</span>
-                                    <div class="description">Url des Webservices</div>
-                                </td>
-                                <td class="value">
-                                    <input type="text" 
-                                        style="width: 97%" />
-                                </td>
-                            </tr>
-                            <tr class="formItem display">
-                                <td class="name">
-                                    <span class="displayName">x-Wert</span>
-                                    <div class="description">Wert der x-Achse</div>
-                                </td>
-                                <td class="value">
-                                    <input type="text" 
-                                        style="width: 97%" />
-                                </td>
-                            </tr>
-                            <tr class="formItem display">
-                                <td class="name">
-                                    <span class="displayName">y-Wert</span>
-                                    <div class="description">Wert der y-Achse</div>
-                                </td>
-                                <td class="value">
-                                    <input type="text" 
-                                        style="width: 97%" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </script>`);
+        var chartType: string = this.viewModel.get("selectedChart");
+        var chartConfig: ChartConfiguration = this.getChartConfiguration(chartType);
+        $(document.body).append(chartConfig.getHtml());
     }
 
     init(): JQueryPromise<any> {
@@ -134,7 +76,19 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
     onContentLoaded(args: any) : void {
         var container = $(args.contentElement);
 
-        var content = $(this.getChartHtml("bar"));
+        var chart: Chart = this.getChart(this.viewModel.get("selectedChart"));
+        var customChartName = this.viewModel.get("customChartName");
+
+        if(customChartName != ""){
+            chart.set_title(customChartName);
+        }
+        else{
+            chart.set_title(this.viewModel.get("defaultChartName"));
+        }
+        
+        chart.set_height("250px");
+
+        var content = $(chart.get_Html());
         $.getScript("/_layouts/15/Scripts/kendo.dataviz.js", () => {
             ecspand.Helper.UI.registerCSSFile("/_layouts/15/Scripts/dataviz/kendo.dataviz.material.css");
             container.append(content);
@@ -191,134 +145,122 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             opacity: 1,
             editMode: false,
             hidden: this.hidden,
-            selectedChart: "bar",
-            charts: self.charts,
-            bubbleChartDataSource: [{
-                x: 100, 
-                y: 100,
-                size: 1000,
-                category: "Demo title 1"
-            },
-            {
-                x: 600,
-                y: 400,
-                size: 10000,
-                category: "Demo title 2"
-            }],
-            xyChartDataSource: [{
-                x: 500,
-                y: 600
+            selectedChart: "area",
+
+            defaultChartName: "Übersicht",
+            customChartName: "",
+
+            defaultHeigth: "250px",
+            customHeigth: "",
+
+            chartValue1: "",
+            chartValue2: "",
+            chartValue3: "",
+            chartValue4: "",
+            chartValue5: "",
+
+            chartDataSource: [{
+                x: 100,
+                y: 600,
+                z: 100
             },{
                 x: 200,
-                y: 700
+                y: 700,
+                z: 200
+            },{
+                x: 400,
+                y: 220,
+                z: 550
+            },{
+                x: 500,
+                y: 400,
+                z: 600
             },{
                 x: 800,
-                y: 550
-            },{
-                x: 100,
-                y: 500
-            }],
-            xChartDataSource: [{
-                x: 100
-            }, {
-                x: 200
-            }, {
-                x: 150
-            }, {
-                x: 200
-            }, {
-                x: 400
-            }, {
-                x: 80
-            }, {
-                x: 120
-            }],
-            lineChartDataSource: [{
-                x: 100,
-                year: 2010
-            }, {
-                x: 200,
-                year: 2011
-            }, {
-                x: 150,
-                year: 2012
-            }, {
-                x: 200,
-                year: 2013
-            }, {
-                x: 400,
-                year: 2014
-            }, {
-                x: 80,
-                year: 2015
-            }, {
-                x: 120,
-                year: 2016
-            }],
-            radarChartDataSource: [{
-                x: 100,
-                unit: '1'
-            }, {
-                x: 200,
-                unit: '2'
-            }, {
-                x: 150,
-                unit: '3'
-            }, {
-                x: 200,
-                unit: '4'
-            }, {
-                x: 400,
-                unit: '5'
-            }, {
-                x: 80,
-                unit: '6'
-            }, {
-                x: 120,
-                unit: '7'
+                y: 1000,
+                z: 300
             }]
         });
     }
 
-    private getChartHtml(chartID: string): Chart {
+    private getChart(chartType: string): Chart {
         var html: string;
 
-        switch(chartID.toLowerCase()){
+        var chartValue1 = this.viewModel.get("chartValue1");
+        var chartValue2 = this.viewModel.get("chartValue2");
+        var chartValue3 = this.viewModel.get("chartValue3");
+        var chartValue4 = this.viewModel.get("chartValue4");
+        var chartValue5 = this.viewModel.get("chartValue5");
+
+        switch(chartType.toLowerCase()){
             case "area":
-                return new AreaChart("x");
+                return new AreaChart(chartValue1);
             case "bar":
-                return new BarChart("x");
+                return new BarChart(chartValue1);
             case "bubble":
-                return new BubbleChart("x", "y", "size");
+                return new BubbleChart(chartValue1, chartValue2, chartValue3);
             case "bullet":
-                return new BulletChart("x", "y");
+                return new BulletChart(chartValue1, chartValue2);
             case "donut":
-                return new DonutChart("x");
+                return new DonutChart(chartValue1);
             case "funnel":
-                return new FunnelChart("x");
+                return new FunnelChart(chartValue1);
             case "line":
-                return new LineChart("x");
+                return new LineChart(chartValue1);
             case "pie":
-                return new PieChart("x");
+                return new PieChart(chartValue1);
             case "polar":
-                return new PolarChart("x", "y");
+                return new PolarChart(chartValue1, chartValue2);
             case "radar":
-                return new RadarChart("x", "unit");
+                return new RadarChart(chartValue1, chartValue2);
             case "scatter":
-                return new ScatterChart("x", "y", "unit");
+                return new ScatterChart(chartValue1, chartValue2, chartValue3);
             default:
                 return null;
         }
     }
 
-    getEditViewModel(): JQueryPromise<any> {
+    private getChartConfiguration(chartType: string): ChartConfiguration {
+        var html: string;
+
+        switch(chartType.toLowerCase()){
+            case "area":
+                return new AreaChartConfiguration();
+            case "bar":
+                return new BarChartConfiguration();
+            case "bubble":
+                return new BubbleChartConfiguration();
+            case "bullet":
+                return new BulletChartConfiguration();
+            case "donut":
+                return new DonutChartConfiguration();
+            case "funnel":
+                return new FunnelChartConfiguration();
+            case "line":
+                return new LineChartConfiguration();
+            case "pie":
+                return new PieChartConfiguration();
+            case "polar":
+                return new PolarChartConfiguration();
+            case "radar":
+                return new RadarChartConfiguration();
+            case "scatter":
+                return new ScatterChartConfiguration();
+            default:
+                return null;
+        }
+    }
+
+    getEditViewModel(): JQueryDeferred<any> {
+        var self = this;
         var enabled = this.editEnabled && !this.isInSuper,
             minimalEnabled = this.editEnabled || this.isInSuper;
 
         return $.Deferred().resolve($.extend(true, this.viewModel, kendo.observable({
             enabled: function () { return enabled; },
             minimalEnabled: function () { return minimalEnabled; },
-            editMode: true
+            editMode: true,
+            charts: self.charts
         })));
     }
 
@@ -331,6 +273,9 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         copy.hidden = undefined;
         copy.opacity = undefined;
         copy.defaultTitle = undefined;
+
+        copy.charts = undefined;
+        copy.chartDataSource = undefined;
 
         return copy;
     }
@@ -385,6 +330,14 @@ abstract class Chart {
         retHtml = retHtml.replace("{extras}", extraString);
 
         return retHtml;
+    }
+
+    public set_title(title: string): void {
+        this.title = title;
+    }
+
+    public set_height(cssHeight: string){
+        this.height = cssHeight;
     }
 }
 
@@ -609,3 +562,236 @@ class ScatterChart extends Chart {
         return extras;
     }
 }
+
+abstract class ChartConfiguration {
+    private htmlTemplate: string = `
+    <script id="elementTabsTestDefault-Template" type="text/x-kendo-template">
+        <div class="templateConfigurator" style="width: 100%; min-width: 600px">
+            <div style="min-height: 300px; width: 100%">
+                <h2 style="margin-top: 8px; margin-left: 20px">Einstellungen für den Tab</h2>
+                <table style="width: 97%; margin: 10px 0px 10px 0px;">
+                    <tr class="formItem display">
+                        <td class="name">
+                            <span class="displayName">Name des Tabs</span>
+                            <div class="description">Beschreibung des Tabs</div>
+                        </td>
+                        <td class="value">
+                            <input type="text" data-bind="enabled: minimalEnabled, value: customTitle, attr: { placeholder: title }" />
+                        </td>
+                    </tr>
+                    <tr class="formItem display">
+                        <td class="name">
+                            <span class="displayName">Diagramm Typ</span>
+                            <div class="description">Art des Diagramms</div>
+                        </td>
+                        <td class="value">
+                            <input data-role="dropdownlist"
+                                data-text-field="chartTitle"
+                                data-value-field="chartType"
+                                data-bind="value: selectedChart, source: charts"
+                                style="width: 100%" />
+                        </td>
+                    </tr>
+                    <tr class="formItem display">
+                        <td class="name">
+                            <span class="displayName">Diagramm Name</span>
+                            <div class="description">Beschreibung des Diagramms</div>
+                        </td>
+                        <td class="value">
+                            <input type="text" 
+                                data-bind="value: customChartName, attr: { placeholder: defaultChartName }"
+                                style="width: 97%" />
+                        </td>
+                    </tr>
+                    <tr class="formItem display">
+                        <td class="name">
+                            <span class="displayName">Datenquelle</span>
+                            <div class="description">Url des Webservices</div>
+                        </td>
+                        <td class="value">
+                            <input type="text" 
+                                style="width: 97%" />
+                        </td>
+                    </tr>
+                    {extraRows}
+                </table>
+            </div>
+        </div>
+    </script>`;
+
+    private rowTemplate: string = `
+    <tr class="formItem display">
+        <td class="name">
+            <span class="displayName">{name}</span>
+            <div class="description">{value}</div>
+        </td>
+        <td class="value">
+            {htmlItem}
+        </td>
+    </tr>`;
+
+    protected getRowHtml(name: string, value: string, htmlItem: string){
+        return this.rowTemplate
+            .replace("{name}", name)
+            .replace("{value}", value)
+            .replace("{htmlItem}", htmlItem);
+    }
+
+    protected abstract getRowsHtml(): Array<string>;
+
+    public getHtml(): string {
+        var rowsHtml = this.getRowsHtml();
+        var html = "";
+
+        rowsHtml.forEach(rowHtml => {
+            html += rowHtml;
+        });
+
+        return this.htmlTemplate.replace("{extraRows}", html);
+    }
+}
+
+class AreaChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class BarChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class BubbleChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("x-Wert", 
+            "Wert der x-Achse", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Durchmesser-Wert", 
+            "Wert des Durchmessers", 
+            `<input type="text" data-bind="value: chartValue3" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class BulletChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("Wert", 
+            "Aktueller Wert", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Ziel Wert", 
+            "Zu erreichender Wert", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class DonutChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("Wert", 
+            "Aktueller Wert", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class FunnelChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("Wert", 
+            "Aktueller Wert", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class LineChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class PieChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("Wert", 
+            "Aktueller Wert", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class PolarChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("x-Wert", 
+            "Wert der x-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class RadarChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("Wert", 
+            "Aktueller Wert", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Kategorie", 
+            "Name einer Kategorie", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+class ScatterChartConfiguration extends ChartConfiguration {
+    protected getRowsHtml(): Array<string> {
+        var rows = new Array<string>();
+        rows.push(this.getRowHtml("x-Wert", 
+            "Wert auf der x-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert auf der y-Achse", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Kategorie", 
+            "Name einer Kategorie", 
+            `<input type="text" data-bind="value: chartValue3" style="width: 97%" />`));
+
+        return rows;
+    }
+}
+
+
+//# sourceURL=tabSendDocumentMail.js
