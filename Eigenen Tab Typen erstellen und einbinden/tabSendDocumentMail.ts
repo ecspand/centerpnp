@@ -47,8 +47,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         super(template, vm, options);
         this.tabStrip = tabStrip;
 
-        var chartType: string = this.viewModel.get("selectedChart");
-        var chartConfig: ChartConfiguration = this.getChartConfiguration(chartType);
+        var chartConfig: ChartConfiguration = this.getChartConfiguration();
         $(document.body).append(chartConfig.getHtml());
     }
 
@@ -88,11 +87,16 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         
         chart.set_height("250px");
 
-        var content = $(chart.get_Html());
-        $.getScript("/_layouts/15/Scripts/kendo.dataviz.js", () => {
-            ecspand.Helper.UI.registerCSSFile("/_layouts/15/Scripts/dataviz/kendo.dataviz.material.css");
-            container.append(content);
-            kendo.bind(container, kendo.observable(this.viewModel));
+        var dataSourceUrl = this.viewModel.get("dataSourceUrl").replace(/"/g, "'");
+        ODataHelper.get(dataSourceUrl).done(oData => {
+            this.viewModel.set("chartDataSource", oData);
+            var content = $(chart.get_Html());
+            $.getScript("/_layouts/15/Scripts/kendo.dataviz.js", () => {
+                ecspand.Helper.UI.registerCSSFile("/_layouts/15/Scripts/dataviz/kendo.dataviz.material.css");
+                $("#chartContainer").remove();
+                container.append(content);
+                kendo.bind(container, kendo.observable(this.viewModel));
+            });
         });
     }
 
@@ -101,7 +105,6 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         dfd.resolve()
         return dfd.promise();
     }
-
 
     getElementTemplate(): string {
 
@@ -146,41 +149,35 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             editMode: false,
             hidden: this.hidden,
             selectedChart: "area",
+            isChartVisible: function(current) {
+                var selectedChart = this.get("selectedChart");
+                return selectedChart === current;
+            },
 
             defaultChartName: "Übersicht",
             customChartName: "",
 
+            chartDataSource: null,
+
             defaultHeigth: "250px",
             customHeigth: "",
 
+            dataSourceUrl: "",
+            
             chartValue1: "",
             chartValue2: "",
             chartValue3: "",
             chartValue4: "",
-            chartValue5: "",
-
-            chartDataSource: [{
-                x: 100,
-                y: 600,
-                z: 100
-            },{
-                x: 200,
-                y: 700,
-                z: 200
-            },{
-                x: 400,
-                y: 220,
-                z: 550
-            },{
-                x: 500,
-                y: 400,
-                z: 600
-            },{
-                x: 800,
-                y: 1000,
-                z: 300
-            }]
+            chartValue5: ""
         });
+    }
+
+    private emptyChartValues(): void {
+        this.viewModel.set("chartValue1", "");
+        this.viewModel.set("chartValue2", "");
+        this.viewModel.set("chartValue3", "");
+        this.viewModel.set("chartValue4", "");
+        this.viewModel.set("chartValue5", "");
     }
 
     private getChart(chartType: string): Chart {
@@ -196,7 +193,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             case "area":
                 return new AreaChart(chartValue1);
             case "bar":
-                return new BarChart(chartValue1);
+                return new BarChart(chartValue1, chartValue2);
             case "bubble":
                 return new BubbleChart(chartValue1, chartValue2, chartValue3);
             case "bullet":
@@ -206,7 +203,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             case "funnel":
                 return new FunnelChart(chartValue1);
             case "line":
-                return new LineChart(chartValue1);
+                return new LineChart(chartValue1, chartValue2);
             case "pie":
                 return new PieChart(chartValue1);
             case "polar":
@@ -220,35 +217,22 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         }
     }
 
-    private getChartConfiguration(chartType: string): ChartConfiguration {
-        var html: string;
+    private getChartConfiguration(): ChartConfiguration {
+        var config = new ChartConfiguration();
 
-        switch(chartType.toLowerCase()){
-            case "area":
-                return new AreaChartConfiguration();
-            case "bar":
-                return new BarChartConfiguration();
-            case "bubble":
-                return new BubbleChartConfiguration();
-            case "bullet":
-                return new BulletChartConfiguration();
-            case "donut":
-                return new DonutChartConfiguration();
-            case "funnel":
-                return new FunnelChartConfiguration();
-            case "line":
-                return new LineChartConfiguration();
-            case "pie":
-                return new PieChartConfiguration();
-            case "polar":
-                return new PolarChartConfiguration();
-            case "radar":
-                return new RadarChartConfiguration();
-            case "scatter":
-                return new ScatterChartConfiguration();
-            default:
-                return null;
-        }
+        config.push(new AreaChartConfiguration());
+        config.push(new BarChartConfiguration());
+        config.push(new BubbleChartConfiguration());
+        config.push(new BulletChartConfiguration());
+        config.push(new DonutChartConfiguration());
+        config.push(new FunnelChartConfiguration());
+        config.push(new LineChartConfiguration());
+        config.push(new PieChartConfiguration());
+        config.push(new PolarChartConfiguration());
+        config.push(new RadarChartConfiguration());
+        config.push(new ScatterChartConfiguration());
+
+        return config;
     }
 
     getEditViewModel(): JQueryDeferred<any> {
@@ -260,7 +244,18 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             enabled: function () { return enabled; },
             minimalEnabled: function () { return minimalEnabled; },
             editMode: true,
-            charts: self.charts
+            charts: self.charts,
+            onChartChange: () => {
+                //this.emptyChartValues();
+            },
+            dataSourceUrlFormatted: function(value) {
+                var url = this.get("dataSourceUrl"),
+                    value = value || url,
+                    formattedUrl = value.replace(/"/g, "'");
+                    
+                this.set("dataSourceUrl", formattedUrl);
+                return value;
+            }
         })));
     }
 
@@ -276,6 +271,8 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 
         copy.charts = undefined;
         copy.chartDataSource = undefined;
+
+        copy.dataSourceUrl = copy.dataSourceUrl.replace(/'/g, "\\\"");
 
         return copy;
     }
@@ -297,7 +294,7 @@ abstract class Chart {
     protected abstract get_Extras(): Array<string>;
 
     private htmlTemplate: string = `
-    <div>
+    <div id="chartContainer">
         <div data-role="chart"
             data-title="{ text: '{title}', position: 'top' }"
             data-series-defaults="{ type: '{type}' }"
@@ -359,7 +356,7 @@ class AreaChart extends Chart {
 }
 
 class BarChart extends Chart {
-    constructor(public fieldName: string){
+    constructor(public fieldName: string, public axisCategoryField: string){
         super("column");
     }
 
@@ -371,7 +368,10 @@ class BarChart extends Chart {
     }
 
     protected get_Extras(): Array<string> {
-        return new Array<string>();
+        var extras = new Array<string>();
+        extras.push(`data-category-axis="{ field: '${this.axisCategoryField}' }"`);
+
+        return extras;
     }
 }
 
@@ -471,7 +471,7 @@ class FunnelChart extends Chart {
 }
 
 class LineChart extends Chart {
-    constructor(public fieldName: string){
+    constructor(public fieldName: string, public axisCategoryField: string){
         super("line");
     }
 
@@ -483,7 +483,10 @@ class LineChart extends Chart {
     }
 
     protected get_Extras(): Array<string> {
-        return new Array<string>();
+        var extras = new Array<string>();
+        extras.push(`data-category-axis="{ field: '${this.axisCategoryField}' }"`);
+
+        return extras;
     }
 }
 
@@ -563,7 +566,14 @@ class ScatterChart extends Chart {
     }
 }
 
-abstract class ChartConfiguration {
+class ChartConfiguration {
+
+    private chartConfigurations: Array<ChartConfigurationBase>;
+
+    constructor(){
+        this.chartConfigurations = new Array<ChartConfigurationBase>();
+    }
+
     private htmlTemplate: string = `
     <script id="elementTabsTestDefault-Template" type="text/x-kendo-template">
         <div class="templateConfigurator" style="width: 100%; min-width: 600px">
@@ -588,7 +598,9 @@ abstract class ChartConfiguration {
                             <input data-role="dropdownlist"
                                 data-text-field="chartTitle"
                                 data-value-field="chartType"
-                                data-bind="value: selectedChart, source: charts"
+                                data-bind="value: selectedChart, 
+                                    events: { change: onChartChange },
+                                    source: charts"
                                 style="width: 100%" />
                         </td>
                     </tr>
@@ -609,7 +621,8 @@ abstract class ChartConfiguration {
                             <div class="description">Url des Webservices</div>
                         </td>
                         <td class="value">
-                            <input type="text" 
+                            <input type="text"
+                                data-bind="value: dataSourceUrlFormatted"
                                 style="width: 97%" />
                         </td>
                     </tr>
@@ -619,8 +632,28 @@ abstract class ChartConfiguration {
         </div>
     </script>`;
 
+    public push(chartConfig: ChartConfigurationBase) {
+        this.chartConfigurations.push(chartConfig);
+    }
+
+    public getHtml(): string {
+        var rowsHtml = "";
+        this.chartConfigurations.forEach(chartConfig => {
+            rowsHtml += chartConfig.getRowsHtml();
+        });
+
+        return this.htmlTemplate.replace("{extraRows}", rowsHtml);
+    }
+}
+
+abstract class ChartConfigurationBase {
+    
+    constructor(protected type: string){
+
+    }
+
     private rowTemplate: string = `
-    <tr class="formItem display">
+    <tr class="formItem display" data-bind="visible: isChartVisible('{type}')">
         <td class="name">
             <span class="displayName">{name}</span>
             <div class="description">{value}</div>
@@ -634,25 +667,20 @@ abstract class ChartConfiguration {
         return this.rowTemplate
             .replace("{name}", name)
             .replace("{value}", value)
-            .replace("{htmlItem}", htmlItem);
+            .replace("{htmlItem}", htmlItem)
+            .replace("{type}", this.type);
     }
 
-    protected abstract getRowsHtml(): Array<string>;
-
-    public getHtml(): string {
-        var rowsHtml = this.getRowsHtml();
-        var html = "";
-
-        rowsHtml.forEach(rowHtml => {
-            html += rowHtml;
-        });
-
-        return this.htmlTemplate.replace("{extraRows}", html);
-    }
+    public abstract getRowsHtml(): Array<string>;
 }
 
-class AreaChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class AreaChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('area');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
             "Wert der y-Achse", 
@@ -662,25 +690,38 @@ class AreaChartConfiguration extends ChartConfiguration {
     }
 }
 
-class BarChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class BarChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('bar');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
             "Wert der y-Achse", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Kategorie", 
+            "Name einer Kategorie", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
     }
 }
 
-class BubbleChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class BubbleChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('bubble');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
-        rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
-            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("x-Wert", 
             "Wert der x-Achse", 
+            `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("y-Wert", 
+            "Wert der y-Achse", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
         rows.push(this.getRowHtml("Durchmesser-Wert", 
             "Wert des Durchmessers", 
@@ -690,8 +731,13 @@ class BubbleChartConfiguration extends ChartConfiguration {
     }
 }
 
-class BulletChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class BulletChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('bullet');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
             "Aktueller Wert", 
@@ -704,8 +750,13 @@ class BulletChartConfiguration extends ChartConfiguration {
     }
 }
 
-class DonutChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class DonutChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('donut');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
             "Aktueller Wert", 
@@ -715,8 +766,13 @@ class DonutChartConfiguration extends ChartConfiguration {
     }
 }
 
-class FunnelChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class FunnelChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('funnel');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
             "Aktueller Wert", 
@@ -726,19 +782,32 @@ class FunnelChartConfiguration extends ChartConfiguration {
     }
 }
 
-class LineChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class LineChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('line');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
             "Wert der y-Achse", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Kategorie", 
+            "Name einer Kategorie", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
     }
 }
 
-class PieChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class PieChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('pie');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
             "Aktueller Wert", 
@@ -748,8 +817,13 @@ class PieChartConfiguration extends ChartConfiguration {
     }
 }
 
-class PolarChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class PolarChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('polar');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("x-Wert", 
             "Wert der x-Achse", 
@@ -762,8 +836,13 @@ class PolarChartConfiguration extends ChartConfiguration {
     }
 }
 
-class RadarChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class RadarChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('radar');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
             "Aktueller Wert", 
@@ -776,8 +855,13 @@ class RadarChartConfiguration extends ChartConfiguration {
     }
 }
 
-class ScatterChartConfiguration extends ChartConfiguration {
-    protected getRowsHtml(): Array<string> {
+class ScatterChartConfiguration extends ChartConfigurationBase {
+
+    constructor() {
+        super('scatter');
+    }
+
+    public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("x-Wert", 
             "Wert auf der x-Achse", 
@@ -790,6 +874,32 @@ class ScatterChartConfiguration extends ChartConfiguration {
             `<input type="text" data-bind="value: chartValue3" style="width: 97%" />`));
 
         return rows;
+    }
+}
+
+class ODataHelper {
+    public static get(url: string) : JQueryPromise<any> {
+        var dfd = $.Deferred();
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                "accept": "application/json;odata=verbose",
+            },
+            success: function(data){
+                dfd.resolve(data.d.results);
+            },
+            error: function(error){
+                dfd.reject(error);
+            }
+        });
+
+        return dfd.promise();
+    }
+
+    public static getListByTitle(title: string): JQueryPromise<any> {
+        return this.get(_spPageContextInfo.webServerRelativeUrl + `/_api/web/lists/GetByTitle('${title}')/items`);
     }
 }
 
