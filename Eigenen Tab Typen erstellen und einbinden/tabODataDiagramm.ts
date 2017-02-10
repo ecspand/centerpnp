@@ -5,9 +5,9 @@
 // Weitere Informationen ueber die KendoUI-Diagramme entnehmen Sie bitte der Online-Dokumentation von Kendo unter
 // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart
 
-class Element_tabsODataDiagrammDefault extends ecspand.Templates.ElementBase {
+class Element_tabsDiagramm extends ecspand.Templates.ElementBase {
 
-    templateID = "elementTabsODataDiagrammDefault-Template";
+    templateID = "elementTabsDiagramm-Template";
     tabStrip: ecspand.Controls.TabStrip = null;
 
     // Die verschiedenen Kendo Diagramme
@@ -166,7 +166,7 @@ class Element_tabsODataDiagrammDefault extends ecspand.Templates.ElementBase {
 
         var template = "// [EDS:{0}]\n" +
             "var elmselftemp = (_this || this), settings = '{2}',\n" +
-            "btn = new Element_tabsODataDiagrammDefault(elmselftemp, JSON.parse(settings), elmselftemp.tabStrip, elmselftemp.{1}Options || {});\n" +
+            "btn = new Element_tabsDiagramm(elmselftemp, JSON.parse(settings), elmselftemp.tabStrip, elmselftemp.{1}Options || {});\n" +
             "elmselftemp.deferreds.push(btn.init());\n" +
             "// [EDE:{0}]";
 
@@ -670,7 +670,7 @@ class ChartConfiguration {
     }
 
     private htmlTemplate: string = `
-    <script id="elementTabsODataDiagrammDefault-Template" type="text/x-kendo-template">
+    <script id="elementTabsDiagramm-Template" type="text/x-kendo-template">
         <div class="templateConfigurator" style="width: 100%; min-width: 600px">
             <div style="min-height: 300px; width: 100%">
                 <h2 style="margin-top: 8px; margin-left: 20px">Einstellungen für den Tab</h2>
@@ -1031,4 +1031,4 @@ class ODataHelper {
 }
 
 
-//# sourceURL=tabSendDocumentMail.js
+//# sourceURL=tabODataDigramm.js
