@@ -642,7 +642,7 @@ class ChartConfiguration {
     public getHtml(): string {
         var rowsHtml = "";
         this.chartConfigurations.forEach(chartConfig => {
-            rowsHtml += chartConfig.getRowsHtml();
+            rowsHtml += chartConfig.getRowsHtml().join("");
         });
 
         return this.htmlTemplate.replace("{extraRows}", rowsHtml);
