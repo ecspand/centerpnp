@@ -191,7 +191,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 
         switch(chartType.toLowerCase()){
             case "area":
-                return new AreaChart(chartValue1);
+                return new AreaChart(chartValue1, chartValue2);
             case "bar":
                 return new BarChart(chartValue1, chartValue2);
             case "bubble":
@@ -339,7 +339,7 @@ abstract class Chart {
 }
 
 class AreaChart extends Chart {
-    constructor(public fieldName: string){
+    constructor(public fieldName: string, public axisCategoryField: string){
         super("area");
     }
 
@@ -351,7 +351,10 @@ class AreaChart extends Chart {
     }
 
     protected get_Extras(): Array<string> {
-        return new Array<string>();
+        var extras = new Array<string>();
+        extras.push(`data-category-axis="{ field: '${this.axisCategoryField}' }"`);
+
+        return extras;
     }
 }
 
@@ -685,6 +688,9 @@ class AreaChartConfiguration extends ChartConfigurationBase {
         rows.push(this.getRowHtml("y-Wert", 
             "Wert der y-Achse", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
+        rows.push(this.getRowHtml("Kategorie", 
+            "Name einer Kategorie", 
+            `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
     }
