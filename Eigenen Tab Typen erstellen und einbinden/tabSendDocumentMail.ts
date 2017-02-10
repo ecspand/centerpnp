@@ -297,6 +297,7 @@ abstract class Chart {
     <div id="chartContainer">
         <div data-role="chart"
             data-title="{ text: '{title}', position: 'top' }"
+            data-theme="Bootstrap",
             data-series-defaults="{ type: '{type}' }"
             data-series="[
                 {series}
