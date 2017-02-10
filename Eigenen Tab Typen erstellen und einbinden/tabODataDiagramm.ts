@@ -2,11 +2,15 @@
 /// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/kendo-ui/kendo-ui.d.ts" />
 
-class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
+// Weitere Informationen ueber die KendoUI-Diagramme entnehmen Sie bitte der Online-Dokumentation von Kendo unter
+// http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart
 
-    templateID = "elementTabsTestDefault-Template";
+class Element_tabsODataDiagrammDefault extends ecspand.Templates.ElementBase {
+
+    templateID = "elementTabsODataDiagrammDefault-Template";
     tabStrip: ecspand.Controls.TabStrip = null;
 
+    // Die verschiedenen Kendo Diagramme
     private charts = [{
             chartTitle: "Area",
             chartType: "area"
@@ -43,6 +47,49 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         }
     ];
 
+    // Die verschiedenen Kendo-Farbpaletten
+    private chartThemes = [{
+            themeTitle: "Black",
+            themeType: "Black"
+        },{
+            themeTitle: "BlueOpal",
+            themeType: "BlueOpal"
+        },{
+            themeTitle: "Bootstrap",
+            themeType: "Bootstrap"
+        },{
+            themeTitle: "Default",
+            themeType: "Default"
+        },{
+            themeTitle: "Flat",
+            themeType: "Flat"
+        },{
+            themeTitle: "HighContrast",
+            themeType: "HighContrast"
+        },{
+            themeTitle: "Material",
+            themeType: "Material"
+        },{
+            themeTitle: "MaterialBlack",
+            themeType: "MaterialBlack"
+        },{
+            themeTitle: "Metro",
+            themeType: "Metro"
+        },{
+            themeTitle: "MetroBlack",
+            themeType: "MetroBlack"
+        },{
+            themeTitle: "Moonlight",
+            themeType: "Moonlight"
+        },{
+            themeTitle: "Silver",
+            themeType: "Silver"
+        },{
+            themeTitle: "Uniform",
+            themeType: "Uniform"
+        }
+    ];
+
     constructor(template: ecspand.Templates.TemplateBase, vm: any, tabStrip: ecspand.Controls.TabStrip, options?: ecspand.Templates.ElementBaseOptions) {
         super(template, vm, options);
         this.tabStrip = tabStrip;
@@ -72,11 +119,15 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         return dfd.promise();
     }
 
+    // Wird automatisch aufgerufen, wenn der Tab aufgerufen wird. Hier wird das HTML des Diagramms und der Datensatz der OData-Quelle geladen
     onContentLoaded(args: any) : void {
         var container = $(args.contentElement);
 
         var chart: Chart = this.getChart(this.viewModel.get("selectedChart"));
         var customChartName = this.viewModel.get("customChartName");
+        var chartTheme = this.viewModel.get("selectedTheme");
+
+        chart.set_theme(chartTheme);
 
         if(customChartName != ""){
             chart.set_title(customChartName);
@@ -85,14 +136,19 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             chart.set_title(this.viewModel.get("defaultChartName"));
         }
         
-        chart.set_height("250px");
+        var customChartHeight = this.viewModel.get("customHeigth");
+        if(customChartHeight != ""){
+            chart.set_height(customChartHeight);
+        }
+        else{
+            chart.set_height(this.viewModel.get("defaultHeigth"));
+        }
 
         var dataSourceUrl = this.viewModel.get("dataSourceUrl").replace(/"/g, "'");
         ODataHelper.get(dataSourceUrl).done(oData => {
             this.viewModel.set("chartDataSource", oData);
             var content = $(chart.get_Html());
             $.getScript("/_layouts/15/Scripts/kendo.dataviz.js", () => {
-                ecspand.Helper.UI.registerCSSFile("/_layouts/15/Scripts/dataviz/kendo.dataviz.material.css");
                 $("#chartContainer").remove();
                 container.append(content);
                 kendo.bind(container, kendo.observable(this.viewModel));
@@ -110,7 +166,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 
         var template = "// [EDS:{0}]\n" +
             "var elmselftemp = (_this || this), settings = '{2}',\n" +
-            "btn = new Element_tabsTestDefault(elmselftemp, JSON.parse(settings), elmselftemp.tabStrip, elmselftemp.{1}Options || {});\n" +
+            "btn = new Element_tabsODataDiagrammDefault(elmselftemp, JSON.parse(settings), elmselftemp.tabStrip, elmselftemp.{1}Options || {});\n" +
             "elmselftemp.deferreds.push(btn.init());\n" +
             "// [EDE:{0}]";
 
@@ -119,6 +175,8 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         return template.format(id, id.replace(/-/g, ""), this.getConfigSettingsSerialized())
     }
 
+    // Diese Methode gibt das Standard-ViewModel zurück, welches hauptsächlich für die Darstellung und konfigurierbare Funktionalität des eigentlichen Tabs benötigt wird.
+    // Hier werden außerdem die Attribute fuer das Diagramm festgelegt.
     getDefaultViewModel(): any {
         var getCustomTitle = this.getCustomTitle.bind(this);
         var self = this;
@@ -149,6 +207,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             editMode: false,
             hidden: this.hidden,
             selectedChart: "area",
+            selectedTheme: "Bootstrap",
             isChartVisible: function(current) {
                 var selectedChart = this.get("selectedChart");
                 return selectedChart === current;
@@ -164,6 +223,8 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 
             dataSourceUrl: "",
             
+            // Die folgenden 5 Werte koennen von der Konfiguration dazu benutzt werden, um Werte zu speichern.
+            // Diese Werte werden dann von dem Diagramm geladen.
             chartValue1: "",
             chartValue2: "",
             chartValue3: "",
@@ -172,14 +233,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         });
     }
 
-    private emptyChartValues(): void {
-        this.viewModel.set("chartValue1", "");
-        this.viewModel.set("chartValue2", "");
-        this.viewModel.set("chartValue3", "");
-        this.viewModel.set("chartValue4", "");
-        this.viewModel.set("chartValue5", "");
-    }
-
+    // In dieser Methode wird ein Diagramm zurueckgegeben, welches laut Konfiguration geladen werden soll.
     private getChart(chartType: string): Chart {
         var html: string;
 
@@ -217,6 +271,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         }
     }
 
+    // In dieser Methode wird die Konfiguration zurueckgegeben. Jede Konfiguration eines Diagrammtyps muss hier registriert werden.
     private getChartConfiguration(): ChartConfiguration {
         var config = new ChartConfiguration();
 
@@ -235,6 +290,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         return config;
     }
 
+    // Diese Methode wird automatisch aufgerufen, um das ViewModel zurueckzugeben, welches nur fuer die Konfiguration relevant ist.
     getEditViewModel(): JQueryDeferred<any> {
         var self = this;
         var enabled = this.editEnabled && !this.isInSuper,
@@ -245,8 +301,9 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
             minimalEnabled: function () { return minimalEnabled; },
             editMode: true,
             charts: self.charts,
+            chartThemes: self.chartThemes,
             onChartChange: () => {
-                //this.emptyChartValues();
+                
             },
             dataSourceUrlFormatted: function(value) {
                 var url = this.get("dataSourceUrl"),
@@ -259,6 +316,7 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
         })));
     }
 
+    // In dieser muessen alle Werte aus dem ViewModel, welche nicht gespeichert werden sollen, wieder auf undefined gesetzt werden.
     public getConfigSettings(): any {
         var copy: any = super.getConfigSettings();
         copy.editMode = undefined;
@@ -279,13 +337,14 @@ class Element_tabsTestDefault extends ecspand.Templates.ElementBase {
 }
 
 
-//Charts
-
+// Vater-Klasse fuer jedes Diagramm. Hier sind Werte enhalten, welche fuer alle Typen gleich sind.
+// Z.B. gibt es hier die Vorlage fuer das HTML jedes Diagramms.
 abstract class Chart {
 
     protected type: string;
     protected title: string = "Chart";
     protected height: string = "150px";
+    protected theme: string = "Bootstrap";
 
     private series: string = "";
     private extras: Array<string> = new Array<string>();
@@ -297,7 +356,7 @@ abstract class Chart {
     <div id="chartContainer">
         <div data-role="chart"
             data-title="{ text: '{title}', position: 'top' }"
-            data-theme="Bootstrap",
+            data-theme="{theme}",
             data-series-defaults="{ type: '{type}' }"
             data-series="[
                 {series}
@@ -312,6 +371,22 @@ abstract class Chart {
         this.type = type;
     }
 
+    private doesStringEndsWithNumber(str: string): boolean {
+        if(str.endsWith("0") || 
+            str.endsWith("1") || 
+            str.endsWith("2") || 
+            str.endsWith("3") || 
+            str.endsWith("4") || 
+            str.endsWith("5") || 
+            str.endsWith("6") || 
+            str.endsWith("7") || 
+            str.endsWith("8") || 
+            str.endsWith("9")){
+            return true;
+        }
+        return false;
+    }
+
     public get_Html(): string {
         this.series = this.get_Series();
         this.extras = this.get_Extras();
@@ -319,7 +394,8 @@ abstract class Chart {
             .replace("{title}", this.title)
             .replace("{series}", this.series)
             .replace("{type}", this.type)
-            .replace("{height}", this.height);
+            .replace("{height}", this.height)
+            .replace("{theme}", this.theme);
         
         var extraString = "";
         this.extras.forEach(extra => {
@@ -336,9 +412,21 @@ abstract class Chart {
 
     public set_height(cssHeight: string){
         this.height = cssHeight;
+        if(this.doesStringEndsWithNumber(cssHeight)){
+            this.height = cssHeight + "px";
+        }
+    }
+
+    public set_theme(theme: string): void {
+        this.theme = theme;
     }
 }
 
+// Ab hier folgen alle Diagramm Typen. 
+// Im Konstruktor wird der Kendo-Diagramm-Typ uebergeben.
+// In der Methode get_Series wird das Kendo-Series HTML zurueckgegeben. Hier ist definiert, wie der DataSource aus dem ViewModel auf das Diagramm abgebildet wird.
+// In der Methode get_Extras werden Diagramm-Spezifische Attribute zurueckgegeben. Das ist beispielsweise die Beschriftung der Werte auf der x-Achse, was z.B. fuer ein 
+// Kreis-Diagramm keinen Sinn ergibt, da es hier keine x-Achse gibt.
 class AreaChart extends Chart {
     constructor(public fieldName: string, public axisCategoryField: string){
         super("area");
@@ -570,6 +658,9 @@ class ScatterChart extends Chart {
     }
 }
 
+// Ab hier folgen die Klassen, welche fuer die Konfiguration relevant sind.
+// Die Klasse ChartConfiguration beinhaltet das Grundgeruest der einzelnen Diagramm-Konfigurationen.
+// Jede Konfiguration muss ueber die Methode push registriert werden.
 class ChartConfiguration {
 
     private chartConfigurations: Array<ChartConfigurationBase>;
@@ -579,7 +670,7 @@ class ChartConfiguration {
     }
 
     private htmlTemplate: string = `
-    <script id="elementTabsTestDefault-Template" type="text/x-kendo-template">
+    <script id="elementTabsODataDiagrammDefault-Template" type="text/x-kendo-template">
         <div class="templateConfigurator" style="width: 100%; min-width: 600px">
             <div style="min-height: 300px; width: 100%">
                 <h2 style="margin-top: 8px; margin-left: 20px">Einstellungen für den Tab</h2>
@@ -610,6 +701,20 @@ class ChartConfiguration {
                     </tr>
                     <tr class="formItem display">
                         <td class="name">
+                            <span class="displayName">Diagramm Stil</span>
+                            <div class="description">Farbschema des Diagramms</div>
+                        </td>
+                        <td class="value">
+                            <input data-role="dropdownlist"
+                                data-text-field="themeTitle"
+                                data-value-field="themeType"
+                                data-bind="value: selectedTheme,
+                                    source: chartThemes"
+                                style="width: 100%" />
+                        </td>
+                    </tr>
+                    <tr class="formItem display">
+                        <td class="name">
                             <span class="displayName">Diagramm Name</span>
                             <div class="description">Beschreibung des Diagramms</div>
                         </td>
@@ -621,8 +726,19 @@ class ChartConfiguration {
                     </tr>
                     <tr class="formItem display">
                         <td class="name">
+                            <span class="displayName">Diagramm Höhe</span>
+                            <div class="description">CSS-Höhe des Diagramms</div>
+                        </td>
+                        <td class="value">
+                            <input type="text" 
+                                data-bind="value: customHeigth, attr: { placeholder: defaultHeigth }"
+                                style="width: 97%" />
+                        </td>
+                    </tr>
+                    <tr class="formItem display">
+                        <td class="name">
                             <span class="displayName">Datenquelle</span>
-                            <div class="description">Url des Webservices</div>
+                            <div class="description">Url des OData-Webservices</div>
                         </td>
                         <td class="value">
                             <input type="text"
@@ -650,6 +766,9 @@ class ChartConfiguration {
     }
 }
 
+// Die Klasse ChartConfigurationBase ist die Vater-Klasse fuer alle Konfigurationsklassen.
+// Die Methode getRowHtml gibt das HTML fuer eine Reihe innerhalb der Konfiguration zurueck.
+// In der Methode getRowsHtml gibt jede Konfiguration alle diagrammspezifischen Reihen vom HTML zurueck
 abstract class ChartConfigurationBase {
     
     constructor(protected type: string){
@@ -687,10 +806,10 @@ class AreaChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("Kategorie", 
-            "Name einer Kategorie", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -706,10 +825,10 @@ class BarChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("Kategorie", 
-            "Name einer Kategorie", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -725,13 +844,13 @@ class BubbleChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("x-Wert", 
-            "Wert der x-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
         rows.push(this.getRowHtml("Durchmesser-Wert", 
-            "Wert des Durchmessers", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue3" style="width: 97%" />`));
 
         return rows;
@@ -747,10 +866,10 @@ class BulletChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
-            "Aktueller Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("Ziel Wert", 
-            "Zu erreichender Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -766,7 +885,7 @@ class DonutChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
-            "Aktueller Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
 
         return rows;
@@ -782,7 +901,7 @@ class FunnelChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
-            "Aktueller Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
 
         return rows;
@@ -798,10 +917,10 @@ class LineChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("Kategorie", 
-            "Name einer Kategorie", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -817,7 +936,7 @@ class PieChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
-            "Aktueller Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
 
         return rows;
@@ -833,10 +952,10 @@ class PolarChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("x-Wert", 
-            "Wert der x-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -852,10 +971,10 @@ class RadarChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("Wert", 
-            "Aktueller Wert", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("Kategorie", 
-            "Name einer Kategorie", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
 
         return rows;
@@ -871,19 +990,20 @@ class ScatterChartConfiguration extends ChartConfigurationBase {
     public getRowsHtml(): Array<string> {
         var rows = new Array<string>();
         rows.push(this.getRowHtml("x-Wert", 
-            "Wert auf der x-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue1" style="width: 97%" />`));
         rows.push(this.getRowHtml("y-Wert", 
-            "Wert auf der y-Achse", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue2" style="width: 97%" />`));
         rows.push(this.getRowHtml("Kategorie", 
-            "Name einer Kategorie", 
+            "Interner Feldname", 
             `<input type="text" data-bind="value: chartValue3" style="width: 97%" />`));
 
         return rows;
     }
 }
 
+// Diese Klasse dient als Hilfe, um Daten von einem OData-Webservice zu laden.
 class ODataHelper {
     public static get(url: string) : JQueryPromise<any> {
         var dfd = $.Deferred();

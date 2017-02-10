@@ -11,28 +11,36 @@ Die ecspand center patterns & practices bieten Beispiele und Best Practices zu d
 
 #### Software ####
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [NodeJS + npm](https://nodejs.org)
+* [NodeJS + npm](https://nodejs.org) (optional für TypeScript und Jasmine-Tests)
 
 #### Vorgehen ####
 
 Erstellen Sie zunächst einen Clone und idealerweise auch einen eigenen Branch, an dem Sie frei experimentieren und probieren können. Das Projekt bietet Ihnen Intellisense, 
 mit einer Ausnahme: direkt in den Klassen haben  Sie per Intellisense keinen Zugriff auf Instanzmethoden oder Instanzvariablen - dies bietet Visual Studio Code aktuell leider nicht.
 
-#### Arbeiten mit TypeScript
-Wenn Sie mit TypeScript arbeiten möchten führen Sie folgende Schritte aus:
+#### Arbeiten mit TypeScript und Jasmine-Tests
+Wenn Sie mit TypeScript und Jasmine-Tests arbeiten möchten führen Sie folgende Schritte aus:
 
 * Öffnen Sie in Visual Studio Code die Konsole mittels **Strg + ö** und
 * geben Sie den Befehl ``` npm init ``` ein.
-* Anschließend geben Sie den Befehl ``` npm install gulp-cli --save ``` ein.
+* Anschließend geben Sie den Befehl ``` npm install gulp-cli -g ``` ein.
+* Abschließend geben Sie den Befehl ``` npm install karma-cli -g ``` ein.
 
-Der TypeScript-Kompiler und Gulp werden dadurch automatisch heruntergeladen und eingerichtet. Soll eine TypeScript Datei kompiliert werden
+Die benötigten Komponenten werden dadurch automatisch heruntergeladen und eingerichtet.
+Alle (Ordner mit) zu kompilierenden TypeScript Dateien müssen registriert werden. Dazu
 * öffnen Sie die Datei **tsconfig.json** und
 * tragen die Ordner der TypeScript-Dateien innerhalb von **files** ein.
 
-Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden.
+Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden. Die Ausgabe erfolgt in dem Ordner **.src**. Soll beim Speichern automatisch das TypeScript
+kompiliert werden, geben Sie den Befehl ``` gulp watch ``` ein.
 
-<br /><br />
+#### Erstellen von Jasmine Tests
+Erstellen Sie unter dem Ordner **Tests** eine Datei *filename*_spec.ts. Innerhalb dieser Datei können Sie nun Ihre Jasmine-Tests schreiben.
+Nachdem die .ts Datei mit ``` gulp ``` kompiliert wurde, kann der Testrunner Karma gestartet werden. Dieses erfolgt über
+den Befehl ``` karma ```. Möchten Sie die Test-Auswertung im Browser betrachten, geben Sie stattdessen den Befehl ``` karma start --reporters html ```  ein .
+Das Ergebnis wird in der Datei Report.html gespeichert.
 
+#### Sonstiges
 Wenn Sie auf dem Laufenden bleiben möchten, empfehlen wir dieses Projekt zu abonnieren. Wir versuchen, wie bereits erwähnt, nach und nach weitere Patterns und Practices bereitstellen.
 
 #### Merge Requests und neue Patterns und Practices ####
