@@ -23,21 +23,20 @@ Wenn Sie mit TypeScript und Jasmine-Tests arbeiten möchten führen Sie folgende
 
 * Öffnen Sie in Visual Studio Code die Konsole mittels **Strg + ö** und
 * geben Sie den Befehl ``` npm init ``` ein.
-* Anschließend geben Sie den Befehl ``` npm install gulp-cli -g ``` ein.
-* Abschließend geben Sie den Befehl ``` npm install karma-cli -g ``` ein.
+* Anschließend geben Sie den Befehl ``` npm install gulp-cli karma-cli -g ``` ein.
 
 Die benötigten Komponenten werden dadurch automatisch heruntergeladen und eingerichtet.
-Alle (Ordner mit) zu kompilierenden TypeScript Dateien müssen registriert werden. Dazu
+Alle (Ordner mit) zu kompilierenden TypeScript-Dateien müssen registriert werden. Dazu
 * öffnen Sie die Datei **tsconfig.json** und
 * tragen die Ordner der TypeScript-Dateien innerhalb von **files** ein.
 
-Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden. Die Ausgabe erfolgt in dem Ordner **.src**. Soll beim Speichern automatisch das TypeScript
+Die Kompilierung kann innerhalb der Konsole mit dem Befehl ``` gulp ``` gestartet werden. Die Ausgabe der JavaScript-Dateien erfolgt in dem Ordner **.src**. Soll beim Speichern automatisch das TypeScript
 kompiliert werden, geben Sie den Befehl ``` gulp watch ``` ein.
 
 #### Erstellen von Jasmine Tests
-Erstellen Sie unter dem Ordner **Tests** eine Datei *filename*_spec.ts. Innerhalb dieser Datei können Sie nun Ihre Jasmine-Tests schreiben.
+Erstellen Sie in dem Ordner **Tests** eine Datei *filename*_spec.ts. Innerhalb dieser Datei können Sie nun beliebige Jasmine-Tests mit TypeScript schreiben.
 Nachdem die .ts Datei mit ``` gulp ``` kompiliert wurde, kann der Testrunner Karma gestartet werden. Dieses erfolgt über
-den Befehl ``` karma ```. Möchten Sie die Test-Auswertung im Browser betrachten, geben Sie stattdessen den Befehl ``` karma start --reporters html ```  ein .
+den Befehl ``` karma ```. Möchten Sie eine Test-Auswertung im Browser betrachten, geben Sie stattdessen den Befehl ``` karma start --reporters html ```  ein.
 Das Ergebnis wird in der Datei Report.html gespeichert.
 
 #### Sonstiges
