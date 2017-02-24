@@ -250,7 +250,7 @@ class Element_tabsDiagramm extends ecspand.Templates.ElementBase {
                 return new BarChart(chartValue1, chartValue2);
             case "bubble":
                 return new BubbleChart(chartValue1, chartValue2, chartValue3);
-            case "verticalbullet":
+            case "bullet":
                 return new BulletChart(chartValue1, chartValue2);
             case "donut":
                 return new DonutChart(chartValue1);
@@ -260,9 +260,9 @@ class Element_tabsDiagramm extends ecspand.Templates.ElementBase {
                 return new LineChart(chartValue1, chartValue2);
             case "pie":
                 return new PieChart(chartValue1);
-            case "polarline":
+            case "polar":
                 return new PolarChart(chartValue1, chartValue2);
-            case "radarline":
+            case "radar":
                 return new RadarChart(chartValue1, chartValue2);
             case "scatter":
                 return new ScatterChart(chartValue1, chartValue2, chartValue3);
