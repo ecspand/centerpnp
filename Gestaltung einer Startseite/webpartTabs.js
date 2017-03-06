@@ -4,6 +4,11 @@ $.fn.webpartTabs = function() {
         $tabstrip = null,
         throbber = null;
 
+	if (!$elements || !$elements.length) {
+		console.warn("Es wurde kein Element zum Binden der Tabs gefunden");
+		return;
+	}
+	
     $elements.children().hide();
 
     function init() {

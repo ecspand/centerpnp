@@ -3,7 +3,12 @@ $.fn.webpartPanelBar = function() {
 	var $elements = this,
         $panelbar = null,
         throbber = null ;
-        
+    
+	if (!$elements || !$elements.length) {
+		console.warn("Es wurde kein Element zum Binden der PanelBar gefunden");
+		return;
+	}
+	
     $elements.children().hide();
 
     function init() {
