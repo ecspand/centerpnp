@@ -1,0 +1,24 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+            {
+                "Name": "gridMenu",
+                "ClassName": "Template_gridMenu_example",
+                "FileName": "gridMenu_example",
+                "Inherits": "gridMenuDefault",
+                "IsDefault": false,
+                "Editable": true
+            }
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+
