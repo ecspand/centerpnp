@@ -1,0 +1,61 @@
+
+{
+    "ContentConfiguration": {
+        "CustomCSSFileUrl": "",
+        "CustomJSFileUrl": "",
+        "TemplateDefinitions": [
+            {
+                "Name": "menu",
+                "ClassName": "Template_menu_example",
+                "ContainerSelector": ".fileCoverMenu",
+                "FileName": "menu_example",
+                "Inherits": "menuDefault",
+                "IsDefault": false,
+                "Editable": true
+            }
+        ],
+        "TemplateConfigurations": {
+            "FileConfigurations": [
+                {
+                    "CMID": "Kundenakte",
+                    "FileName": "contentDefault",
+                    "IsDefault": false,
+                    "TemplateConfigurations": [
+                        {
+                            "FileName": "fileCoverDefault",
+                            "TemplateConfigurations": [
+                                {
+                                    "FileName": "primaryDefault"
+                                },
+                                {
+                                    "FileName": "importantDataDefault"
+                                },
+                                {
+                                    "FileName": "masterDataDefault"
+                                },
+                                {
+                                    "FileName": "menu_example"
+                                }
+                            ]
+                        },
+                        {
+                            "FileName": "tabsDefault"
+                        },
+                        {
+                            "FileName": "quickSearchDefault"
+                        },
+                        {
+                            "FileName": "navigationDefault"
+                        },
+                        {
+                            "FileName": "historyDefault"
+                        }
+                    ]
+                }
+            ],
+            "FolderConfigurations": [
+            ]
+        }
+    }
+}
+

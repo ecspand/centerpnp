@@ -1,4 +1,4 @@
-# Eigene Button Typen erstellen und einbinden #
+# Eigene Button Typen erstellen und einbinden (Beta) #
 
 Das ecspand center bietet die Möglichkeit eigene Buttons mit spezielen Funktionalitäten zu entwickeln und diese wie Standard-Schaltflächen an der center Oberfläche zu verwenden. 
 <br/>

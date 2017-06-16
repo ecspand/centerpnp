@@ -5,11 +5,13 @@
         "CustomJSFileUrl": "",
         "TemplateDefinitions": [
             {
-                "Name": "gridMenu",
-                "ClassName": "Template_gridMenu_example",
-                "FileName": "gridMenu_example",
-                "Inherits": "gridMenuDefault",
+                "Name": "toolbar",
+                "ClassName": "Template_toolbar_example",
+                "ContainerSelector": null,
+                "FileName": "toolbar_example",
+                "Inherits": "toolbarDefault",
                 "IsDefault": false,
+                "PreventAutoload": true,
                 "Editable": true
             }
         ],
