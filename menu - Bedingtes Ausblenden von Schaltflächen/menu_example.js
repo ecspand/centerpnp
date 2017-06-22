@@ -18,7 +18,8 @@ var Template_menu_example = (function (_super) {
         $.getScript("http://mysite/scripts/permissionmanager.js").then(function () {
 
             // Initialisierung der Basisklasse sowie der PermissionManager Klasse 
-            return $.when(_super.prototype.init.call(this), PermissionManager.load(_spPageContextInfo.siteAbsoluteUrl, "Berechtigungen"));
+            return $.when(_super.prototype.init.call(this),
+                PermissionManager.load(_spPageContextInfo.siteAbsoluteUrl, "Berechtigungen"));
 
         }).then(function () {
             if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
@@ -28,7 +29,7 @@ var Template_menu_example = (function (_super) {
                 Jedes Options Objekt erwartet eine enabled Funktione die eine JQueryPromise<boolean> zurück gibt. Der zurückgegebene Boolean-Wert bestimmt darüber, ob die Schaltfläche ein oder ausgeblendet werden soll */
                 _this.meineSchaltflaecheOptions = {
                     enabled: function () {
-                        
+
                         //var spItemPermission = _this.ctx.get_listItem().get_effectiveBasePermissions(); // Berechtigungen des Benutzers auf das aktuelle ListItem
 
                         var viewModel = _this.ctx.get_viewModel(), // Abruf der formatierten Eigenschaften des aktuellen Elementes
