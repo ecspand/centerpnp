@@ -31,7 +31,7 @@ $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
     function _load() {
 
         // Alle benötigten ecspand center-Skripte werden geladen
-        ecspand.Prerequesite.load().done(function() {
+        return ecspand.Prerequesite.load().done(function() {
 
             init();
 
@@ -49,7 +49,9 @@ $.fn.ecspandQuickSearch = function(quickSearchOptions, providerOptions) {
     }
     else {
         $.getScript(_spPageContextInfo.siteAbsoluteUrl + "/_layouts/15/ECSpand/Center/Scripts/Helper/Prerequesite.js").done(function() {
-            _load();
+            return _load();
+        }).fail(function(error) {
+            console.error("Could not load the quicksearch")
         });
     }
 

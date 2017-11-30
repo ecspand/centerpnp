@@ -18,18 +18,35 @@ var Template_gridMenu_example = (function (_super) {
     Template_gridMenu_example.prototype.init = function () {
         var _this = this;
         var dfd = $.Deferred();
-        var self = this;
+
         _super.prototype.init.call(this).done(function () {
             if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
                 // ---[ELEMENTS-BLOCK-START]---
                 // ---[ELEMENTS-BLOCK-END]---
-                
+
+                // Beispiel: Schaltfläche ausblenden
                 // Erst hier ist einigermaßen sicher, dass die Schaltfläche an der Oberfläche gebunden wurde
-                $("#btnGridMenuShowList").hide();
-                
+                _this.container.find("#btnGridMenuShowList").hide();
+
                 // Alternativ können die Elemente auch direkt aus dem viewModel geworfen werden 
                 // this.viewModel.items.splice(0, 1);
-                
+
+
+                // Beispiel: Neue Schaltfläche soll nur eingeblendet werden, wenn es sich um einen bestimmten Ordner handelt
+                // FolderTokenElement, ListElement, ListTokenElement, ContentTypeElement
+                if (_this.folder.get_elementType() === ecspand.ElementType.ListElement) {
+                    var showBtn = {
+                        controlType: "button",
+                        title: ecspand.cultures.buttonElements.permissions,
+                        id: "btnShow",
+                        iconSource: "/_layouts/15/1031/images/formatmap16x16.png?rev=23",
+                        iconStyle: "top: -145px; left: -74px;",
+                        click: function (e) {
+                        }
+                    };
+                    _this.viewModel.items.push(showBtn);
+                }
+
                 dfd.resolve();
             }
             else {
@@ -37,9 +54,6 @@ var Template_gridMenu_example = (function (_super) {
             }
         }).fail(dfd.reject);
         return dfd.promise();
-    };
-    Template_gridMenu_example.prototype.destroy = function () {
-        _super.prototype.destroy.call(this);
     };
     return Template_gridMenu_example;
 })(Template_gridMenu);
