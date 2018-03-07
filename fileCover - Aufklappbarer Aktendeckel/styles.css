@@ -6,7 +6,7 @@
 .fileCoverPanel .title {
 	display: table-cell; 
 	border: 1px solid lightgray; 
-	height: 200px; 
+	height: 700px; 
 	vertical-align: middle; 
 	cursor: pointer;
 }
@@ -49,7 +49,8 @@
 .contentInner .contentRight {
 	float: none !important;
 	right: 0px !Important;
-	width: auto !important;
+	width: 100% !important;
+	height: 100% !important;
 	display: table-cell !important;
 	vertical-align: top !important;
 }
