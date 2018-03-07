@@ -14,7 +14,7 @@ var Template_menu_customButton = (function (_super) {
         var _this = this;
         var dfd = $.Deferred();
         var self = this;
-        $.when($.getScript("http://mpaw-vs2012-01/Scripts/buttonSendDocumentMail.js")), _super.prototype.init.call(this).done(function () {
+        $.when($.getScript("http://mpaw-vs2012-01/Scripts/buttonSendDocumentMail.js"), _super.prototype.init.call(this)).done(function () {
             if (_this.ctx || _this.get_templateConfiguration().get_preventAutoload()) {
                 // ---[ELEMENTS-BLOCK-START]---
                 // ---[ELEMENTS-BLOCK-END]---
