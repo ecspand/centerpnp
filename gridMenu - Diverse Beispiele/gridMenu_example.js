@@ -24,13 +24,6 @@ var Template_gridMenu_example = (function (_super) {
                 // ---[ELEMENTS-BLOCK-START]---
                 // ---[ELEMENTS-BLOCK-END]---
 
-                // Beispiel: Schaltfläche ausblenden
-                // Erst hier ist einigermaßen sicher, dass die Schaltfläche an der Oberfläche gebunden wurde
-                _this.container.find("#btnGridMenuShowList").hide();
-
-                // Alternativ können die Elemente auch direkt aus dem viewModel geworfen werden 
-                // this.viewModel.items.splice(0, 1);
-
 
                 // Beispiel: Neue Schaltfläche soll nur eingeblendet werden, wenn es sich um einen bestimmten Ordner handelt
                 // FolderTokenElement, ListElement, ListTokenElement, ContentTypeElement
@@ -55,5 +48,22 @@ var Template_gridMenu_example = (function (_super) {
         }).fail(dfd.reject);
         return dfd.promise();
     };
+    
+    Template_gridMenu_example.prototype.initComplete = function () {
+        var _this = this;
+        var dfd = $.Deferred();
+
+        _super.prototype.initComplete.call(this).done(function () {
+            // Beispiel: Schaltfläche ausblenden
+            // Erst hier ist einigermaßen sicher, dass die Schaltfläche an der Oberfläche gebunden wurde
+            _this.container.find("#btnGridMenuShowList").hide();
+
+            // Alternativ können die Elemente auch direkt aus dem viewModel geworfen werden 
+            // this.viewModel.items.splice(0, 1);
+        });
+        
+        return dfd.promise();
+    };
+    
     return Template_gridMenu_example;
 })(Template_gridMenu);
